@@ -8,24 +8,27 @@ UNITS
 END UNITS
 
 MACRO FIRST
-   CLASS CORE ;
+   CLASS BLOCK ;
    FOREIGN FIRST 0 0 ;
    SIZE 80.000 BY 80.000 ;
    SYMMETRY X Y ;
+   SITE core ;
    PIN VDD
       DIRECTION INOUT ;
       USE POWER ;
+      SHAPE ABUTMENT ;
       PORT
          LAYER metal1 ;
-         RECT 0.000 79.000 1.000 80.000 ;
+         RECT 0.000 78.000 80.000 80.000 ;
       END
    END VDD
    PIN VSS
       DIRECTION INOUT ;
       USE GROUND ;
+      SHAPE ABUTMENT ;
       PORT
          LAYER metal1 ;
-         RECT 0.000 0.000 1.000 1.000 ;
+         RECT 0.000 0.000 80.000 2.000 ;
       END
    END VSS
    PIN in1
