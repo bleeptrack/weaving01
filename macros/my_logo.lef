@@ -12,13 +12,13 @@ MACRO my_logo
    FOREIGN my_logo 0 0 ;
    SIZE 80.000 BY 80.000 ;
    SYMMETRY X Y ;
-   SITE core ;
+   SITE unithd ;
    PIN VDD
       DIRECTION INOUT ;
       USE POWER ;
       SHAPE ABUTMENT ;
       PORT
-         LAYER metal1 ;
+         LAYER met1 ;
          RECT 0.000 78.000 80.000 80.000 ;
       END
    END VDD
@@ -27,7 +27,7 @@ MACRO my_logo
       USE GROUND ;
       SHAPE ABUTMENT ;
       PORT
-         LAYER metal1 ;
+         LAYER met1 ;
          RECT 0.000 0.000 80.000 2.000 ;
       END
    END VSS
@@ -35,7 +35,7 @@ MACRO my_logo
       DIRECTION INPUT ;
       USE SIGNAL ;
       PORT
-         LAYER metal1 ;
+         LAYER met1 ;
          RECT 2.000 2.000 3.000 3.000 ;
       END
    END in1
@@ -43,12 +43,12 @@ MACRO my_logo
       DIRECTION OUTPUT ;
       USE SIGNAL ;
       PORT
-         LAYER metal1 ;
+         LAYER met1 ;
          RECT 77.000 77.000 78.000 78.000 ;
       END
    END out1
    OBS
-      LAYER metal1 ;
+      LAYER met1 ;
       RECT 0.000 0.000 80.000 80.000 ;
    END
 END my_logo
