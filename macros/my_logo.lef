@@ -1,4 +1,4 @@
-# LEF file generated for FIRST
+# LEF file generated for my_logo
 VERSION 5.8 ;
 NAMESCASESENSITIVE ON ;
 DIVIDERCHAR "/" ;
@@ -7,9 +7,9 @@ UNITS
    DATABASE MICRONS 1000 ;
 END UNITS
 
-MACRO FIRST
+MACRO my_logo
    CLASS BLOCK ;
-   FOREIGN FIRST 0 0 ;
+   FOREIGN my_logo 0 0 ;
    SIZE 80.000 BY 80.000 ;
    SYMMETRY X Y ;
    SITE core ;
@@ -51,4 +51,4 @@ MACRO FIRST
       LAYER metal1 ;
       RECT 0.000 0.000 80.000 80.000 ;
    END
-END FIRST
+END my_logo
