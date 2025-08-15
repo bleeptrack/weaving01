@@ -12,7 +12,6 @@ MACRO my_logo
    FOREIGN my_logo 0 0 ;
    SIZE 80.000 BY 80.000 ;
    SYMMETRY X Y ;
-   SITE unithd ;
    PIN VDD
       DIRECTION INOUT ;
       USE POWER ;
