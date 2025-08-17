@@ -19,14 +19,6 @@ cell = lib.new_cell("my_logo")
 rect = gdstk.rectangle((2, 2), (10, 10), layer=126)
 cell.add(rect)
 
-# Add power connections to match the LEF file
-# Layer 30 for Metal3 (power distribution layer)
-vpwr_rect = gdstk.rectangle((0, 0), (8, 1.5), layer=30, datatype=0)  # VPWR pin
-cell.add(vpwr_rect)
-
-vgnd_rect = gdstk.rectangle((24, 0), (32, 1.5), layer=30, datatype=0)  # VGND pin
-cell.add(vgnd_rect)
-
 # Add PR boundary (placement and routing boundary)
 # Layer 189, datatype 4 for IHP SG13G2 PR boundary
 pr_boundary = gdstk.rectangle((0, 0), (32, 32), layer=189, datatype=4)
@@ -46,42 +38,7 @@ def write_lef_file(filename, cell_name, cell_bounds, pins):
         f.write("  FOREIGN {} ;\n".format(cell_name))
         f.write("  SIZE {:.3f} BY {:.3f} ;\n".format(cell_bounds[2] - cell_bounds[0], cell_bounds[3] - cell_bounds[1]))
         
-        # Add power pins (required for macros)
-        f.write("  PIN VPWR\n")
-        f.write("    DIRECTION INPUT ;\n")
-        f.write("    USE POWER ;\n")
-        f.write("    PORT\n")
-        f.write("      LAYER Metal3 ;\n")
-        f.write("        RECT {:.3f} {:.3f} {:.3f} {:.3f} ;\n".format(
-            cell_bounds[0], cell_bounds[1], cell_bounds[0] + 8, cell_bounds[1] + 1.5))
-        f.write("    END\n")
-        f.write("  END VPWR\n")
-        
-        f.write("  PIN VGND\n")
-        f.write("    DIRECTION INPUT ;\n")
-        f.write("    USE GROUND ;\n")
-        f.write("    PORT\n")
-        f.write("      LAYER Metal3 ;\n")
-        f.write("        RECT {:.3f} {:.3f} {:.3f} {:.3f} ;\n".format(
-            cell_bounds[2] - 8, cell_bounds[1], cell_bounds[2], cell_bounds[1] + 1.5))
-        f.write("    END\n")
-        f.write("  END VGND\n")
-        
-        # Add OBS section for routing obstructions
-        f.write("  OBS\n")
-        f.write("      LAYER Metal1 ;\n")
-        f.write("        RECT {:.3f} {:.3f} {:.3f} {:.3f} ;\n".format(
-            cell_bounds[0], cell_bounds[1] + 4, cell_bounds[2], cell_bounds[3]))
-        f.write("      LAYER Metal2 ;\n")
-        f.write("        RECT {:.3f} {:.3f} {:.3f} {:.3f} ;\n".format(
-            cell_bounds[0], cell_bounds[1] + 4, cell_bounds[2], cell_bounds[3]))
-        f.write("      LAYER Metal3 ;\n")
-        f.write("        RECT {:.3f} {:.3f} {:.3f} {:.3f} ;\n".format(
-            cell_bounds[0], cell_bounds[1] + 4, cell_bounds[2], cell_bounds[3]))
-        f.write("      LAYER Metal4 ;\n")
-        f.write("        RECT {:.3f} {:.3f} {:.3f} {:.3f} ;\n".format(
-            cell_bounds[0], cell_bounds[1] + 4, cell_bounds[2], cell_bounds[3]))
-        f.write("  END\n")
+        # No pins - minimal blackbox macro
         
         f.write("END {}\n".format(cell_name))
         f.write("END LIBRARY\n")
