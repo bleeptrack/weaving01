@@ -23,11 +23,15 @@ module tt_um_example (
   (* keep *)
   my_logo logo();
 
+  // Use all inputs to ensure proper pin connections
+  wire [7:0] ui_sum = ui_in + uio_in;
+  
+  // Connect control signals to outputs to prevent optimization
+  wire [7:0] ctrl_signals = {5'b0, ena, clk, rst_n};
+
   // All output pins must be assigned. If not used, assign to 0.
-  assign uo_out  = ui_in + uio_in;  // Example: ou_out is the sum of ui_in and uio_in
+  assign uo_out  = ui_sum + ctrl_signals;  // Sum plus control signals
   assign uio_out = 8'b0;  // Set all bits to 0
   assign uio_oe  = 8'b0;  // Set all bits to 0 (all pins as inputs)
-
-  // No unused inputs warning needed since we're using all inputs
 
 endmodule
