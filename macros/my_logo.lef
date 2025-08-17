@@ -10,10 +10,354 @@ END UNITS
 MACRO my_logo
    CLASS BLOCK ;
    FOREIGN my_logo 0 0 ;
-   SIZE 32.000 BY 32.000 ;
+   SIZE 161000.000 BY 111520.000 ;
    SYMMETRY X Y ;
+   PIN clk
+      DIRECTION INPUT ;
+      USE SIGNAL ;
+      PORT
+         LAYER MET4 ;
+         RECT 143830.000 110520.000 144130.000 111520.000 ;
+      END
+   END clk
+   PIN ena
+      DIRECTION INPUT ;
+      USE SIGNAL ;
+      PORT
+         LAYER MET4 ;
+         RECT 146590.000 110520.000 146890.000 111520.000 ;
+      END
+   END ena
+   PIN rst_n
+      DIRECTION INPUT ;
+      USE SIGNAL ;
+      PORT
+         LAYER MET4 ;
+         RECT 141070.000 110520.000 141370.000 111520.000 ;
+      END
+   END rst_n
+   PIN ui_in[0]
+      DIRECTION INPUT ;
+      USE SIGNAL ;
+      PORT
+         LAYER MET4 ;
+         RECT 138310.000 110520.000 138610.000 111520.000 ;
+      END
+   END ui_in[0]
+   PIN ui_in[1]
+      DIRECTION INPUT ;
+      USE SIGNAL ;
+      PORT
+         LAYER MET4 ;
+         RECT 135550.000 110520.000 135850.000 111520.000 ;
+      END
+   END ui_in[1]
+   PIN ui_in[2]
+      DIRECTION INPUT ;
+      USE SIGNAL ;
+      PORT
+         LAYER MET4 ;
+         RECT 132790.000 110520.000 133090.000 111520.000 ;
+      END
+   END ui_in[2]
+   PIN ui_in[3]
+      DIRECTION INPUT ;
+      USE SIGNAL ;
+      PORT
+         LAYER MET4 ;
+         RECT 130030.000 110520.000 130330.000 111520.000 ;
+      END
+   END ui_in[3]
+   PIN ui_in[4]
+      DIRECTION INPUT ;
+      USE SIGNAL ;
+      PORT
+         LAYER MET4 ;
+         RECT 127270.000 110520.000 127570.000 111520.000 ;
+      END
+   END ui_in[4]
+   PIN ui_in[5]
+      DIRECTION INPUT ;
+      USE SIGNAL ;
+      PORT
+         LAYER MET4 ;
+         RECT 124510.000 110520.000 124810.000 111520.000 ;
+      END
+   END ui_in[5]
+   PIN ui_in[6]
+      DIRECTION INPUT ;
+      USE SIGNAL ;
+      PORT
+         LAYER MET4 ;
+         RECT 121750.000 110520.000 122050.000 111520.000 ;
+      END
+   END ui_in[6]
+   PIN ui_in[7]
+      DIRECTION INPUT ;
+      USE SIGNAL ;
+      PORT
+         LAYER MET4 ;
+         RECT 118990.000 110520.000 119290.000 111520.000 ;
+      END
+   END ui_in[7]
+   PIN uio_in[0]
+      DIRECTION INPUT ;
+      USE SIGNAL ;
+      PORT
+         LAYER MET4 ;
+         RECT 116230.000 110520.000 116530.000 111520.000 ;
+      END
+   END uio_in[0]
+   PIN uio_in[1]
+      DIRECTION INPUT ;
+      USE SIGNAL ;
+      PORT
+         LAYER MET4 ;
+         RECT 113470.000 110520.000 113770.000 111520.000 ;
+      END
+   END uio_in[1]
+   PIN uio_in[2]
+      DIRECTION INPUT ;
+      USE SIGNAL ;
+      PORT
+         LAYER MET4 ;
+         RECT 110710.000 110520.000 111010.000 111520.000 ;
+      END
+   END uio_in[2]
+   PIN uio_in[3]
+      DIRECTION INPUT ;
+      USE SIGNAL ;
+      PORT
+         LAYER MET4 ;
+         RECT 107950.000 110520.000 108250.000 111520.000 ;
+      END
+   END uio_in[3]
+   PIN uio_in[4]
+      DIRECTION INPUT ;
+      USE SIGNAL ;
+      PORT
+         LAYER MET4 ;
+         RECT 105190.000 110520.000 105490.000 111520.000 ;
+      END
+   END uio_in[4]
+   PIN uio_in[5]
+      DIRECTION INPUT ;
+      USE SIGNAL ;
+      PORT
+         LAYER MET4 ;
+         RECT 102430.000 110520.000 102730.000 111520.000 ;
+      END
+   END uio_in[5]
+   PIN uio_in[6]
+      DIRECTION INPUT ;
+      USE SIGNAL ;
+      PORT
+         LAYER MET4 ;
+         RECT 99670.000 110520.000 99970.000 111520.000 ;
+      END
+   END uio_in[6]
+   PIN uio_in[7]
+      DIRECTION INPUT ;
+      USE SIGNAL ;
+      PORT
+         LAYER MET4 ;
+         RECT 96910.000 110520.000 97210.000 111520.000 ;
+      END
+   END uio_in[7]
+   PIN uio_oe[0]
+      DIRECTION OUTPUT ;
+      USE SIGNAL ;
+      PORT
+         LAYER MET4 ;
+         RECT 49990.000 110520.000 50290.000 111520.000 ;
+      END
+   END uio_oe[0]
+   PIN uio_oe[1]
+      DIRECTION OUTPUT ;
+      USE SIGNAL ;
+      PORT
+         LAYER MET4 ;
+         RECT 47230.000 110520.000 47530.000 111520.000 ;
+      END
+   END uio_oe[1]
+   PIN uio_oe[2]
+      DIRECTION OUTPUT ;
+      USE SIGNAL ;
+      PORT
+         LAYER MET4 ;
+         RECT 44470.000 110520.000 44770.000 111520.000 ;
+      END
+   END uio_oe[2]
+   PIN uio_oe[3]
+      DIRECTION OUTPUT ;
+      USE SIGNAL ;
+      PORT
+         LAYER MET4 ;
+         RECT 41710.000 110520.000 42010.000 111520.000 ;
+      END
+   END uio_oe[3]
+   PIN uio_oe[4]
+      DIRECTION OUTPUT ;
+      USE SIGNAL ;
+      PORT
+         LAYER MET4 ;
+         RECT 38950.000 110520.000 39250.000 111520.000 ;
+      END
+   END uio_oe[4]
+   PIN uio_oe[5]
+      DIRECTION OUTPUT ;
+      USE SIGNAL ;
+      PORT
+         LAYER MET4 ;
+         RECT 36190.000 110520.000 36490.000 111520.000 ;
+      END
+   END uio_oe[5]
+   PIN uio_oe[6]
+      DIRECTION OUTPUT ;
+      USE SIGNAL ;
+      PORT
+         LAYER MET4 ;
+         RECT 33430.000 110520.000 33730.000 111520.000 ;
+      END
+   END uio_oe[6]
+   PIN uio_oe[7]
+      DIRECTION OUTPUT ;
+      USE SIGNAL ;
+      PORT
+         LAYER MET4 ;
+         RECT 30670.000 110520.000 30970.000 111520.000 ;
+      END
+   END uio_oe[7]
+   PIN uio_out[0]
+      DIRECTION OUTPUT ;
+      USE SIGNAL ;
+      PORT
+         LAYER MET4 ;
+         RECT 72070.000 110520.000 72370.000 111520.000 ;
+      END
+   END uio_out[0]
+   PIN uio_out[1]
+      DIRECTION OUTPUT ;
+      USE SIGNAL ;
+      PORT
+         LAYER MET4 ;
+         RECT 69310.000 110520.000 69610.000 111520.000 ;
+      END
+   END uio_out[1]
+   PIN uio_out[2]
+      DIRECTION OUTPUT ;
+      USE SIGNAL ;
+      PORT
+         LAYER MET4 ;
+         RECT 66550.000 110520.000 66850.000 111520.000 ;
+      END
+   END uio_out[2]
+   PIN uio_out[3]
+      DIRECTION OUTPUT ;
+      USE SIGNAL ;
+      PORT
+         LAYER MET4 ;
+         RECT 63790.000 110520.000 64090.000 111520.000 ;
+      END
+   END uio_out[3]
+   PIN uio_out[4]
+      DIRECTION OUTPUT ;
+      USE SIGNAL ;
+      PORT
+         LAYER MET4 ;
+         RECT 61030.000 110520.000 61330.000 111520.000 ;
+      END
+   END uio_out[4]
+   PIN uio_out[5]
+      DIRECTION OUTPUT ;
+      USE SIGNAL ;
+      PORT
+         LAYER MET4 ;
+         RECT 58270.000 110520.000 58570.000 111520.000 ;
+      END
+   END uio_out[5]
+   PIN uio_out[6]
+      DIRECTION OUTPUT ;
+      USE SIGNAL ;
+      PORT
+         LAYER MET4 ;
+         RECT 55510.000 110520.000 55810.000 111520.000 ;
+      END
+   END uio_out[6]
+   PIN uio_out[7]
+      DIRECTION OUTPUT ;
+      USE SIGNAL ;
+      PORT
+         LAYER MET4 ;
+         RECT 52750.000 110520.000 53050.000 111520.000 ;
+      END
+   END uio_out[7]
+   PIN uo_out[0]
+      DIRECTION OUTPUT ;
+      USE SIGNAL ;
+      PORT
+         LAYER MET4 ;
+         RECT 94150.000 110520.000 94450.000 111520.000 ;
+      END
+   END uo_out[0]
+   PIN uo_out[1]
+      DIRECTION OUTPUT ;
+      USE SIGNAL ;
+      PORT
+         LAYER MET4 ;
+         RECT 91390.000 110520.000 91690.000 111520.000 ;
+      END
+   END uo_out[1]
+   PIN uo_out[2]
+      DIRECTION OUTPUT ;
+      USE SIGNAL ;
+      PORT
+         LAYER MET4 ;
+         RECT 88630.000 110520.000 88930.000 111520.000 ;
+      END
+   END uo_out[2]
+   PIN uo_out[3]
+      DIRECTION OUTPUT ;
+      USE SIGNAL ;
+      PORT
+         LAYER MET4 ;
+         RECT 85870.000 110520.000 86170.000 111520.000 ;
+      END
+   END uo_out[3]
+   PIN uo_out[4]
+      DIRECTION OUTPUT ;
+      USE SIGNAL ;
+      PORT
+         LAYER MET4 ;
+         RECT 83110.000 110520.000 83410.000 111520.000 ;
+      END
+   END uo_out[4]
+   PIN uo_out[5]
+      DIRECTION OUTPUT ;
+      USE SIGNAL ;
+      PORT
+         LAYER MET4 ;
+         RECT 80350.000 110520.000 80650.000 111520.000 ;
+      END
+   END uo_out[5]
+   PIN uo_out[6]
+      DIRECTION OUTPUT ;
+      USE SIGNAL ;
+      PORT
+         LAYER MET4 ;
+         RECT 77590.000 110520.000 77890.000 111520.000 ;
+      END
+   END uo_out[6]
+   PIN uo_out[7]
+      DIRECTION OUTPUT ;
+      USE SIGNAL ;
+      PORT
+         LAYER MET4 ;
+         RECT 74830.000 110520.000 75130.000 111520.000 ;
+      END
+   END uo_out[7]
    OBS
       LAYER Metal1 ;
-      RECT 0.000 0.000 32.000 32.000 ;
+      RECT 0.000 0.000 161000.000 111520.000 ;
    END
 END my_logo
