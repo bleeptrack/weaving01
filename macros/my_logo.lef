@@ -1,15 +1,37 @@
-# LEF file generated for my_logo
-VERSION 5.8 ;
-NAMESCASESENSITIVE ON ;
-DIVIDERCHAR "/" ;
-BUSBITCHARS "[]" ;
-UNITS
-   DATABASE MICRONS 1000 ;
-END UNITS
-
+VERSION 5.7 ;
+  NOWIREEXTENSIONATPIN ON ;
+  DIVIDERCHAR "/" ;
+  BUSBITCHARS "[]" ;
 MACRO my_logo
-   CLASS BLACKBOX ;
-   FOREIGN my_logo 0 0 ;
-   SIZE 32.000 BY 32.000 ;
-   SYMMETRY X Y ;
+  CLASS BLOCK ;
+  FOREIGN my_logo ;
+  ORIGIN 0.000 0.000 ;
+  SIZE 32.000 BY 32.000 ;
+  PIN VPWR
+    DIRECTION INPUT ;
+    USE POWER ;
+    PORT
+      LAYER met3 ;
+        RECT 0.000 0.000 8.000 1.500 ;
+    END
+  END VPWR
+  PIN VGND
+    DIRECTION INPUT ;
+    USE GROUND ;
+    PORT
+      LAYER met3 ;
+        RECT 24.000 0.000 32.000 1.500 ;
+    END
+  END VGND
+  OBS
+      LAYER met1 ;
+        RECT 0.000 4.000 32.000 32.000 ;
+      LAYER met2 ;
+        RECT 0.000 4.000 32.000 32.000 ;
+      LAYER met3 ;
+        RECT 0.000 4.000 32.000 32.000 ;
+      LAYER met4 ;
+        RECT 0.000 4.000 32.000 32.000 ;
+  END
 END my_logo
+END LIBRARY

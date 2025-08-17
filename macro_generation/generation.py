@@ -19,6 +19,14 @@ cell = lib.new_cell("my_logo")
 rect = gdstk.rectangle((2, 2), (10, 10), layer=126)
 cell.add(rect)
 
+# Add power connections to match the LEF file
+# Layer 12, datatype 0 for Metal3 (power distribution layer)
+vpwr_rect = gdstk.rectangle((0, 0), (8, 1.5), layer=12, datatype=0)  # VPWR pin
+cell.add(vpwr_rect)
+
+vgnd_rect = gdstk.rectangle((24, 0), (32, 1.5), layer=12, datatype=0)  # VGND pin
+cell.add(vgnd_rect)
+
 # Add PR boundary (placement and routing boundary)
 # Layer 189, datatype 4 for IHP SG13G2 PR boundary
 pr_boundary = gdstk.rectangle((0, 0), (32, 32), layer=189, datatype=4)
@@ -29,25 +37,55 @@ cell.add(pr_boundary)
 def write_lef_file(filename, cell_name, cell_bounds, pins):
     """Write a LEF file for the cell"""
     with open(filename, 'w') as f:
-        f.write("# LEF file generated for {}\n".format(cell_name))
-        f.write("VERSION 5.8 ;\n")
-        f.write("NAMESCASESENSITIVE ON ;\n")
-        f.write("DIVIDERCHAR \"/\" ;\n")
-        f.write("BUSBITCHARS \"[]\" ;\n")
-        f.write("UNITS\n")
-        f.write("   DATABASE MICRONS 1000 ;\n")
-        f.write("END UNITS\n\n")
-        
-        # Define the cell
+        f.write("VERSION 5.7 ;\n")
+        f.write("  NOWIREEXTENSIONATPIN ON ;\n")
+        f.write("  DIVIDERCHAR \"/\" ;\n")
+        f.write("  BUSBITCHARS \"[]\" ;\n")
         f.write("MACRO {}\n".format(cell_name))
-        f.write("   CLASS BLACKBOX ;\n")
-        f.write("   FOREIGN {} 0 0 ;\n".format(cell_name))
-        f.write("   SIZE {:.3f} BY {:.3f} ;\n".format(cell_bounds[2] - cell_bounds[0], cell_bounds[3] - cell_bounds[1]))
-        f.write("   SYMMETRY X Y ;\n")
+        f.write("  CLASS BLOCK ;\n")
+        f.write("  FOREIGN {} ;\n".format(cell_name))
+        f.write("  ORIGIN 0.000 0.000 ;\n")
+        f.write("  SIZE {:.3f} BY {:.3f} ;\n".format(cell_bounds[2] - cell_bounds[0], cell_bounds[3] - cell_bounds[1]))
         
-        # No pins - pure blackbox module for artwork
+        # Add power pins (required for macros)
+        f.write("  PIN VPWR\n")
+        f.write("    DIRECTION INPUT ;\n")
+        f.write("    USE POWER ;\n")
+        f.write("    PORT\n")
+        f.write("      LAYER met3 ;\n")
+        f.write("        RECT {:.3f} {:.3f} {:.3f} {:.3f} ;\n".format(
+            cell_bounds[0], cell_bounds[1], cell_bounds[0] + 8, cell_bounds[1] + 1.5))
+        f.write("    END\n")
+        f.write("  END VPWR\n")
+        
+        f.write("  PIN VGND\n")
+        f.write("    DIRECTION INPUT ;\n")
+        f.write("    USE GROUND ;\n")
+        f.write("    PORT\n")
+        f.write("      LAYER met3 ;\n")
+        f.write("        RECT {:.3f} {:.3f} {:.3f} {:.3f} ;\n".format(
+            cell_bounds[2] - 8, cell_bounds[1], cell_bounds[2], cell_bounds[1] + 1.5))
+        f.write("    END\n")
+        f.write("  END VGND\n")
+        
+        # Add OBS section for routing obstructions
+        f.write("  OBS\n")
+        f.write("      LAYER met1 ;\n")
+        f.write("        RECT {:.3f} {:.3f} {:.3f} {:.3f} ;\n".format(
+            cell_bounds[0], cell_bounds[1] + 4, cell_bounds[2], cell_bounds[3]))
+        f.write("      LAYER met2 ;\n")
+        f.write("        RECT {:.3f} {:.3f} {:.3f} {:.3f} ;\n".format(
+            cell_bounds[0], cell_bounds[1] + 4, cell_bounds[2], cell_bounds[3]))
+        f.write("      LAYER met3 ;\n")
+        f.write("        RECT {:.3f} {:.3f} {:.3f} {:.3f} ;\n".format(
+            cell_bounds[0], cell_bounds[1] + 4, cell_bounds[2], cell_bounds[3]))
+        f.write("      LAYER met4 ;\n")
+        f.write("        RECT {:.3f} {:.3f} {:.3f} {:.3f} ;\n".format(
+            cell_bounds[0], cell_bounds[1] + 4, cell_bounds[2], cell_bounds[3]))
+        f.write("  END\n")
         
         f.write("END {}\n".format(cell_name))
+        f.write("END LIBRARY\n")
 
 # Calculate cell bounds (back to original size)
 cell_width = 32  # 32 microns
