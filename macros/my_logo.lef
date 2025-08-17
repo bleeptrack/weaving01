@@ -17,7 +17,7 @@ MACRO my_logo
       USE POWER ;
       PORT
          LAYER Metal1 ;
-         RECT 14.000 30.000 18.000 32.000 ;
+         RECT 0.000 30.000 32.000 32.000 ;
       END
    END VDD
    PIN VSS
@@ -25,7 +25,7 @@ MACRO my_logo
       USE GROUND ;
       PORT
          LAYER Metal1 ;
-         RECT 14.000 0.000 18.000 2.000 ;
+         RECT 0.000 0.000 32.000 2.000 ;
       END
    END VSS
    PIN in
