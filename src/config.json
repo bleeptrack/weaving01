@@ -14,6 +14,7 @@
   "IGNORE_DISCONNECTED_MODULES": [
     "my_logo", "logo"
   ],
+  "MACRO_PIN_CHECK_EXCLUDE": ["my_logo"],
   "ERROR_ON_DISCONNECTED_PINS": false,
   "FP_PDN_CHECK_NODES": false,
   "ERROR_ON_PDN_VIOLATIONS": false,

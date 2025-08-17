@@ -8,16 +8,8 @@ UNITS
 END UNITS
 
 MACRO my_logo
-   CLASS BLOCK ;
+   CLASS BLACKBOX ;
    FOREIGN my_logo 0 0 ;
    SIZE 32.000 BY 32.000 ;
    SYMMETRY X Y ;
-   PIN dummy
-      DIRECTION INOUT ;
-      USE SIGNAL ;
-      PORT
-         LAYER Metal1 ;
-         RECT 0.000 0.000 1.000 1.000 ;
-      END
-   END dummy
 END my_logo
