@@ -44,7 +44,6 @@ def write_lef_file(filename, cell_name, cell_bounds, pins):
         f.write("MACRO {}\n".format(cell_name))
         f.write("  CLASS BLOCK ;\n")
         f.write("  FOREIGN {} ;\n".format(cell_name))
-        f.write("  ORIGIN 0.000 0.000 ;\n")
         f.write("  SIZE {:.3f} BY {:.3f} ;\n".format(cell_bounds[2] - cell_bounds[0], cell_bounds[3] - cell_bounds[1]))
         
         # Add power pins (required for macros)
