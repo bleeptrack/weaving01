@@ -12,22 +12,6 @@ MACRO my_logo
    FOREIGN my_logo 0 0 ;
    SIZE 32.000 BY 32.000 ;
    SYMMETRY X Y ;
-   PIN PWR
-      DIRECTION INOUT ;
-      USE SIGNAL ;
-      PORT
-         LAYER Metal1 ;
-         RECT 14.000 30.000 18.000 32.000 ;
-      END
-   END PWR
-   PIN GND
-      DIRECTION INOUT ;
-      USE SIGNAL ;
-      PORT
-         LAYER Metal1 ;
-         RECT 14.000 0.000 18.000 2.000 ;
-      END
-   END GND
    OBS
       LAYER Metal1 ;
       RECT 0.000 0.000 32.000 32.000 ;
