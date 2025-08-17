@@ -52,7 +52,7 @@ def write_lef_file(filename, cell_name, cell_bounds, pins):
         f.write("    DIRECTION INPUT ;\n")
         f.write("    USE POWER ;\n")
         f.write("    PORT\n")
-        f.write("      LAYER met3 ;\n")
+        f.write("      LAYER Metal3 ;\n")
         f.write("        RECT {:.3f} {:.3f} {:.3f} {:.3f} ;\n".format(
             cell_bounds[0], cell_bounds[1], cell_bounds[0] + 8, cell_bounds[1] + 1.5))
         f.write("    END\n")
@@ -62,7 +62,7 @@ def write_lef_file(filename, cell_name, cell_bounds, pins):
         f.write("    DIRECTION INPUT ;\n")
         f.write("    USE GROUND ;\n")
         f.write("    PORT\n")
-        f.write("      LAYER met3 ;\n")
+        f.write("      LAYER Metal3 ;\n")
         f.write("        RECT {:.3f} {:.3f} {:.3f} {:.3f} ;\n".format(
             cell_bounds[2] - 8, cell_bounds[1], cell_bounds[2], cell_bounds[1] + 1.5))
         f.write("    END\n")
@@ -70,16 +70,16 @@ def write_lef_file(filename, cell_name, cell_bounds, pins):
         
         # Add OBS section for routing obstructions
         f.write("  OBS\n")
-        f.write("      LAYER met1 ;\n")
+        f.write("      LAYER Metal1 ;\n")
         f.write("        RECT {:.3f} {:.3f} {:.3f} {:.3f} ;\n".format(
             cell_bounds[0], cell_bounds[1] + 4, cell_bounds[2], cell_bounds[3]))
-        f.write("      LAYER met2 ;\n")
+        f.write("      LAYER Metal2 ;\n")
         f.write("        RECT {:.3f} {:.3f} {:.3f} {:.3f} ;\n".format(
             cell_bounds[0], cell_bounds[1] + 4, cell_bounds[2], cell_bounds[3]))
-        f.write("      LAYER met3 ;\n")
+        f.write("      LAYER Metal3 ;\n")
         f.write("        RECT {:.3f} {:.3f} {:.3f} {:.3f} ;\n".format(
             cell_bounds[0], cell_bounds[1] + 4, cell_bounds[2], cell_bounds[3]))
-        f.write("      LAYER met4 ;\n")
+        f.write("      LAYER Metal4 ;\n")
         f.write("        RECT {:.3f} {:.3f} {:.3f} {:.3f} ;\n".format(
             cell_bounds[0], cell_bounds[1] + 4, cell_bounds[2], cell_bounds[3]))
         f.write("  END\n")

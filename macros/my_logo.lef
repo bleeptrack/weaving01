@@ -11,7 +11,7 @@ MACRO my_logo
     DIRECTION INPUT ;
     USE POWER ;
     PORT
-      LAYER met3 ;
+      LAYER Metal3 ;
         RECT 0.000 0.000 8.000 1.500 ;
     END
   END VPWR
@@ -19,18 +19,18 @@ MACRO my_logo
     DIRECTION INPUT ;
     USE GROUND ;
     PORT
-      LAYER met3 ;
+      LAYER Metal3 ;
         RECT 24.000 0.000 32.000 1.500 ;
     END
   END VGND
   OBS
-      LAYER met1 ;
+      LAYER Metal1 ;
         RECT 0.000 4.000 32.000 32.000 ;
-      LAYER met2 ;
+      LAYER Metal2 ;
         RECT 0.000 4.000 32.000 32.000 ;
-      LAYER met3 ;
+      LAYER Metal3 ;
         RECT 0.000 4.000 32.000 32.000 ;
-      LAYER met4 ;
+      LAYER Metal4 ;
         RECT 0.000 4.000 32.000 32.000 ;
   END
 END my_logo
