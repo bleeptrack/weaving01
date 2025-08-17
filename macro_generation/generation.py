@@ -45,8 +45,16 @@ def write_lef_file(filename, cell_name, cell_bounds, pins):
         f.write("   SIZE {:.3f} BY {:.3f} ;\n".format(cell_bounds[2] - cell_bounds[0], cell_bounds[3] - cell_bounds[1]))
         f.write("   SYMMETRY X Y ;\n")
         
-        # No pins - pure blackbox module
-        # No OBS section needed for pure artwork on TopMetal1
+        # Add a dummy port to satisfy precheck requirements
+        f.write("   PIN dummy\n")
+        f.write("      DIRECTION INOUT ;\n")
+        f.write("      USE SIGNAL ;\n")
+        f.write("      PORT\n")
+        f.write("         LAYER Metal1 ;\n")
+        f.write("         RECT {:.3f} {:.3f} {:.3f} {:.3f} ;\n".format(
+            cell_bounds[0], cell_bounds[1], cell_bounds[0] + 1, cell_bounds[1] + 1))
+        f.write("      END\n")
+        f.write("   END dummy\n")
         
         f.write("END {}\n".format(cell_name))
 
