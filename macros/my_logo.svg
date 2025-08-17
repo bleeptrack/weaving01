@@ -2,16 +2,16 @@
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="352" height="352" viewBox="-16 -336 352 352">
 <defs>
 <style type="text/css">
-.l12d0 {stroke: #DCD300; fill: #DCD300; fill-opacity: 0.5;}
 .l126d0 {stroke: #E68FAC; fill: #E68FAC; fill-opacity: 0.5;}
+.l30d0 {stroke: #F6A600; fill: #F6A600; fill-opacity: 0.5;}
 .l189d4 {stroke: #A1CAF1; fill: #A1CAF1; fill-opacity: 0.5;}
 </style>
 </defs>
 <rect x="-16" y="-336" width="352" height="352" fill="#222222" stroke="none"/>
 <g id="my_logo" transform="scale(1 -1)">
-<polygon id="0x2af54e0" class="l126d0" points="20,20 100,20 100,100 20,100"/>
-<polygon id="0x2d00110" class="l12d0" points="0,0 80,0 80,15 0,15"/>
-<polygon id="0x2bfe690" class="l12d0" points="240,0 320,0 320,15 240,15"/>
-<polygon id="0x2be6b30" class="l189d4" points="0,0 320,0 320,320 0,320"/>
+<polygon id="0x16d8350" class="l126d0" points="20,20 100,20 100,100 20,100"/>
+<polygon id="0x16c0390" class="l30d0" points="0,0 80,0 80,15 0,15"/>
+<polygon id="0x150c450" class="l30d0" points="240,0 320,0 320,15 240,15"/>
+<polygon id="0x15a4f20" class="l189d4" points="0,0 320,0 320,320 0,320"/>
 </g>
 </svg>

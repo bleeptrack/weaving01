@@ -20,11 +20,11 @@ rect = gdstk.rectangle((2, 2), (10, 10), layer=126)
 cell.add(rect)
 
 # Add power connections to match the LEF file
-# Layer 12, datatype 0 for Metal3 (power distribution layer)
-vpwr_rect = gdstk.rectangle((0, 0), (8, 1.5), layer=12, datatype=0)  # VPWR pin
+# Layer 30 for Metal3 (power distribution layer)
+vpwr_rect = gdstk.rectangle((0, 0), (8, 1.5), layer=30, datatype=0)  # VPWR pin
 cell.add(vpwr_rect)
 
-vgnd_rect = gdstk.rectangle((24, 0), (32, 1.5), layer=12, datatype=0)  # VGND pin
+vgnd_rect = gdstk.rectangle((24, 0), (32, 1.5), layer=30, datatype=0)  # VGND pin
 cell.add(vgnd_rect)
 
 # Add PR boundary (placement and routing boundary)
