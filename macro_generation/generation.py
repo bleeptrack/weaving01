@@ -14,9 +14,9 @@ lib = gdstk.Library()
 # Geometry must be placed in cells.
 cell = lib.new_cell("my_logo")
 
-# Increase the grid size to create more TopMetal1 coverage
-# Just make one rectangle on TopMetal1 (layer 126) covering the whole cell
-rect = gdstk.rectangle((2, 2), (10, 10), layer=126)  # TopMetal1
+# Use correct layer numbers for IHP SG13G2 PDK
+# Layer 126 for TopMetal1 (artwork layer)
+rect = gdstk.rectangle((2, 2), (10, 10), layer=126)
 cell.add(rect)
 
 # Add PR boundary (placement and routing boundary)
@@ -46,13 +46,7 @@ def write_lef_file(filename, cell_name, cell_bounds, pins):
         f.write("   SYMMETRY X Y ;\n")
         
         # No pins - pure blackbox module
-        
-        # Add routing obstructions
-        f.write("   OBS\n")
-        f.write("      LAYER Metal1 ;\n")
-        f.write("      RECT {:.3f} {:.3f} {:.3f} {:.3f} ;\n".format(
-            cell_bounds[0], cell_bounds[1], cell_bounds[2], cell_bounds[3]))
-        f.write("   END\n")
+        # No OBS section needed for pure artwork on TopMetal1
         
         f.write("END {}\n".format(cell_name))
 
