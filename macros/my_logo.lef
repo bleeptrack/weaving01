@@ -12,38 +12,6 @@ MACRO my_logo
    FOREIGN my_logo 0 0 ;
    SIZE 32.000 BY 32.000 ;
    SYMMETRY X Y ;
-   PIN VDD
-      DIRECTION INOUT ;
-      USE POWER ;
-      PORT
-         LAYER Metal1 ;
-         RECT 0.000 30.000 32.000 32.000 ;
-      END
-   END VDD
-   PIN VSS
-      DIRECTION INOUT ;
-      USE GROUND ;
-      PORT
-         LAYER Metal1 ;
-         RECT 0.000 0.000 32.000 2.000 ;
-      END
-   END VSS
-   PIN in
-      DIRECTION INPUT ;
-      USE SIGNAL ;
-      PORT
-         LAYER Metal1 ;
-         RECT 0.000 14.000 2.000 18.000 ;
-      END
-   END in
-   PIN out
-      DIRECTION OUTPUT ;
-      USE SIGNAL ;
-      PORT
-         LAYER Metal1 ;
-         RECT 30.000 14.000 32.000 18.000 ;
-      END
-   END out
    OBS
       LAYER Metal1 ;
       RECT 0.000 0.000 32.000 32.000 ;
