@@ -9,7 +9,21 @@ length = 8  # Reduced from 8
 avg_width = 4  # Reduced from 3
 gap = 1  # Reduced from 1
 
+sizeX = 10
+sizeY = 10
 
+structure = [[random.randint(0, 1) for _ in range(sizeY)] for _ in range(sizeX)]
+
+# Pretty print the structure array
+print("structure = [")
+for row in structure:
+    print("    " + str(row) + ",")
+print("]")
+x_width = [4] * sizeX
+y_width = [4] * sizeY
+
+#horz_width = max(min_metal6_width, min(math.sin(i*math.pi/3)*avg_width + 2, length-(min_metal6_spacing*2)))
+#vert_width = max(min_metal6_width, min(math.sin(j*math.pi/7)*avg_width + 2, length-(min_metal6_spacing*2)))
 
 # The GDSII file is called a library, which contains multiple cells.
 lib = gdstk.Library()
@@ -18,57 +32,81 @@ lib = gdstk.Library()
 cell = lib.new_cell("my_logo")
 
 # Increase the grid size to create more TopMetal1 coverage
-for i in range(10):  # Reduced from 10
-    for j in range(10):  # Reduced from 10
+for i in range(sizeX):  # Reduced from 10
+    start_x = 0
+  
+    for j in range(sizeY):  # Reduced from 10
+        if j>0 and structure[i][j] == 1 and structure[i][j-1] == 0: 
+            start_x = j
+            print("start_x", start_x)
 
-        horz_width = max(min_metal6_width, min(math.sin(i*math.pi/3)*avg_width + 2, length-(min_metal6_spacing*2)))
-        vert_width = max(min_metal6_width, min(math.sin(j*math.pi/7)*avg_width + 2, length-(min_metal6_spacing*2)))
-        
-        if random.random() > 0.5:
-            rotdir = -1
-        else:
-            rotdir = 1
+        if j>0 and structure[i][j] == 0 and structure[i][j-1] == 1 or j==len(structure[i])-1 and structure[i][j] == 1:
+            end_x = j-1
+            if j==len(structure[i])-1 and structure[i][j] == 1:
+                end_x = j
 
-        # Create the geometry (a single rectangle) and add it to the cell.
-        tx = j*(length)
-        ty = i*(length)
+            print("end_x", end_x, j)
+            vert_width = y_width[j]
+            
+            block_length = length * (end_x-start_x+1)
+            print("block_length", block_length)
+
+            # Create the geometry (a single rectangle) and add it to the cell.
+            tx = start_x*(length)
+            ty = i*(length)
         
-        outerrect = gdstk.rectangle((tx, ty), (tx+length, ty+length), layer=126)  # TopMetal1
-        
-        if rotdir > 0:
             #low_rect = gdstk.rectangle((tx+(length-horz_width)/2, ty), (tx+(length-horz_width)/2+horz_width, ty+length), layer=126)  # TopMetal1
-            rect = gdstk.rectangle((tx, ty+(length-vert_width)/2), (tx+length, ty+(length-vert_width)/2+vert_width), layer=126)  # TopMetal1
+            rect = gdstk.rectangle((tx, ty+(length-vert_width)/2), (tx+block_length, ty+(length-vert_width)/2+vert_width), layer=126)  # TopMetal1
 
-            #stub = (length-vert_width-gap*2)/2
-            #rectLeft = gdstk.rectangle((tx+(length-horz_width)/2, ty), (tx+(length-horz_width)/2+horz_width, ty+stub), layer=126)  # TopMetal1
-            #rectRight = gdstk.rectangle((tx+(length-horz_width)/2, ty+length-stub), (tx+(length-horz_width)/2+horz_width, ty+length), layer=126)  # TopMetal1
-        else:
-            #low_rect = gdstk.rectangle((tx, ty+(length-vert_width)/2), (tx+length, ty+(length-vert_width)/2+vert_width), layer=126)  # TopMetal1
-            rect = gdstk.rectangle((tx+(length-horz_width)/2, ty), (tx+(length-horz_width)/2+horz_width, ty+length), layer=126)  # TopMetal1
+            cell.add(rect)
 
-            #stub = (length-horz_width-gap*2)/2
-            #rectLeft = gdstk.rectangle((tx, ty+(length-vert_width)/2), (tx+stub, ty+(length-vert_width)/2+vert_width), layer=126)  # TopMetal1
-            #rectRight = gdstk.rectangle((tx+length-stub, ty+(length-vert_width)/2), (tx+length, ty+(length-vert_width)/2+vert_width), layer=126)  # TopMetal1
+##invert for easier usage
+structure = [[1 - cell for cell in row] for row in structure]
+print("structure = [")
+for row in structure:
+    print("    " + str(row) + ",")
+print("]")
 
+
+# Increase the grid size to create more TopMetal1 coverage
+for i in range(sizeY):  # Reduced from 10
+    start_y = 0
+  
+    for j in range(sizeX):  # Reduced from 10
+        #print("j", j, "i", i, structure[j][i])
+        if j>0 and structure[j][i] == 1 and structure[j-1][i] == 0: 
+            start_y = j
+            print("start_y", start_y)
+
+        if j>0 and structure[j][i] == 0 and structure[j-1][i] == 1 or j==len(structure)-1 and structure[j][i] == 1:
+            end_y = j-1
+            if j==len(structure)-1 and structure[j][i] == 1:
+                end_y = j
+
+            print("end_y", end_y)
+            horz_width = x_width[j]
+            
+            block_length = length * (end_y-start_y+1)
+            print("block_length", block_length)
+
+            # Create the geometry (a single rectangle) and add it to the cell.
+            ty = start_y*(length)
+            tx = i*(length)
+        
+            #low_rect = gdstk.rectangle((tx+(length-horz_width)/2, ty), (tx+(length-horz_width)/2+horz_width, ty+length), layer=126)  # TopMetal1
+            #rect = gdstk.rectangle((tx, ty+(length-vert_width)/2), (tx+block_length, ty+(length-vert_width)/2+vert_width), layer=126)  # TopMetal1
+            rect = gdstk.rectangle((tx+(length-horz_width)/2, ty), (tx+(length-horz_width)/2+horz_width, ty+block_length), layer=126) 
+
+            cell.add(rect)
+
+        
             
         
-        if random.random() > 0:
-            rect.rotate(-math.pi/2, (tx+length/2, ty+length/2))
-            #low_rect.rotate(-math.pi/2, (tx+length/2, ty+length/2))
-            #rectLeft.rotate(-math.pi/2, (tx+length/2, ty+length/2))
-            #rectRight.rotate(-math.pi/2, (tx+length/2, ty+length/2))
-        
-            
-        
-        #cell.add(outerrect)
-        #cell.add(low_rect)
-        cell.add(rect)
-        #cell.add(rectLeft)
-        #cell.add(rectRight)
+
 
 # Add PR boundary (placement and routing boundary)
 # Layer 189, datatype 4 for IHP SG13G2 PR boundary
-pr_boundary = gdstk.rectangle((0, 0), (32, 32), layer=189, datatype=4)
+pr_boundary = gdstk.rectangle((0, 0), (sizeX*length, sizeY*length), layer=189, datatype=4)
 cell.add(pr_boundary)
 
 

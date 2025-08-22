@@ -1,14 +1,65 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="352" height="352" viewBox="-16 -336 352 352">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="880" height="880" viewBox="-40 -840 880 880">
 <defs>
 <style type="text/css">
 .l126d0 {stroke: #E68FAC; fill: #E68FAC; fill-opacity: 0.5;}
 .l189d4 {stroke: #A1CAF1; fill: #A1CAF1; fill-opacity: 0.5;}
 </style>
 </defs>
-<rect x="-16" y="-336" width="352" height="352" fill="#222222" stroke="none"/>
+<rect x="-40" y="-840" width="880" height="880" fill="#222222" stroke="none"/>
 <g id="my_logo" transform="scale(1 -1)">
-<polygon id="0x27cb710" class="l126d0" points="20,20 100,20 100,100 20,100"/>
-<polygon id="0x280e300" class="l189d4" points="0,0 320,0 320,320 0,320"/>
+<polygon id="0x24c4c80" class="l126d0" points="80,20 240,20 240,60 80,60"/>
+<polygon id="0x252d700" class="l126d0" points="480,20 640,20 640,60 480,60"/>
+<polygon id="0x240be80" class="l126d0" points="720,20 800,20 800,60 720,60"/>
+<polygon id="0x23ad260" class="l126d0" points="0,100 320,100 320,140 0,140"/>
+<polygon id="0x24ab8d0" class="l126d0" points="400,100 480,100 480,140 400,140"/>
+<polygon id="0x24c0770" class="l126d0" points="560,100 640,100 640,140 560,140"/>
+<polygon id="0x24646d0" class="l126d0" points="720,100 800,100 800,140 720,140"/>
+<polygon id="0x253ff20" class="l126d0" points="0,180 160,180 160,220 0,220"/>
+<polygon id="0x261db70" class="l126d0" points="320,180 560,180 560,220 320,220"/>
+<polygon id="0x261f260" class="l126d0" points="720,180 800,180 800,220 720,220"/>
+<polygon id="0x2594fa0" class="l126d0" points="0,260 80,260 80,300 0,300"/>
+<polygon id="0x2596fb0" class="l126d0" points="160,340 320,340 320,380 160,380"/>
+<polygon id="0x2574a50" class="l126d0" points="480,340 560,340 560,380 480,380"/>
+<polygon id="0x22e8640" class="l126d0" points="720,340 800,340 800,380 720,380"/>
+<polygon id="0x26493d0" class="l126d0" points="80,420 240,420 240,460 80,460"/>
+<polygon id="0x2618e90" class="l126d0" points="560,420 800,420 800,460 560,460"/>
+<polygon id="0x25d9cc0" class="l126d0" points="160,500 240,500 240,540 160,540"/>
+<polygon id="0x25b5940" class="l126d0" points="320,500 800,500 800,540 320,540"/>
+<polygon id="0x259db30" class="l126d0" points="240,580 400,580 400,620 240,620"/>
+<polygon id="0x25ec520" class="l126d0" points="560,580 800,580 800,620 560,620"/>
+<polygon id="0x25e0010" class="l126d0" points="80,660 160,660 160,700 80,700"/>
+<polygon id="0x237b740" class="l126d0" points="240,660 320,660 320,700 240,700"/>
+<polygon id="0x241ccc0" class="l126d0" points="560,660 720,660 720,700 560,700"/>
+<polygon id="0x25af040" class="l126d0" points="160,740 240,740 240,780 160,780"/>
+<polygon id="0x25a2e30" class="l126d0" points="480,740 560,740 560,780 480,780"/>
+<polygon id="0x2427170" class="l126d0" points="640,740 720,740 720,780 640,780"/>
+<polygon id="0x24611a0" class="l126d0" points="20,0 60,0 60,80 20,80"/>
+<polygon id="0x2484f90" class="l126d0" points="20,320 60,320 60,800 20,800"/>
+<polygon id="0x24afc00" class="l126d0" points="100,240 140,240 140,400 100,400"/>
+<polygon id="0x256a850" class="l126d0" points="100,480 140,480 140,640 100,640"/>
+<polygon id="0x25dd3e0" class="l126d0" points="100,720 140,720 140,800 100,800"/>
+<polygon id="0x2624030" class="l126d0" points="180,160 220,160 220,320 180,320"/>
+<polygon id="0x23f4050" class="l126d0" points="180,560 220,560 220,720 180,720"/>
+<polygon id="0x2469ed0" class="l126d0" points="260,0 300,0 300,80 260,80"/>
+<polygon id="0x245e060" class="l126d0" points="260,160 300,160 300,320 260,320"/>
+<polygon id="0x251fbc0" class="l126d0" points="260,400 300,400 300,560 260,560"/>
+<polygon id="0x252b860" class="l126d0" points="260,720 300,720 300,800 260,800"/>
+<polygon id="0x25a8440" class="l126d0" points="340,0 380,0 380,160 340,160"/>
+<polygon id="0x23ef630" class="l126d0" points="340,240 380,240 380,480 340,480"/>
+<polygon id="0x256d520" class="l126d0" points="340,640 380,640 380,800 340,800"/>
+<polygon id="0x25c1680" class="l126d0" points="420,0 460,0 460,80 420,80"/>
+<polygon id="0x259f4c0" class="l126d0" points="420,240 460,240 460,480 420,480"/>
+<polygon id="0x248fa30" class="l126d0" points="420,560 460,560 460,800 420,800"/>
+<polygon id="0x24b3470" class="l126d0" points="500,80 540,80 540,160 500,160"/>
+<polygon id="0x24b34e0" class="l126d0" points="500,240 540,240 540,320 500,320"/>
+<polygon id="0x24b2d20" class="l126d0" points="500,400 540,400 540,480 500,480"/>
+<polygon id="0x25159f0" class="l126d0" points="500,560 540,560 540,720 500,720"/>
+<polygon id="0x257aef0" class="l126d0" points="580,160 620,160 620,400 580,400"/>
+<polygon id="0x257af60" class="l126d0" points="580,720 620,720 620,800 580,800"/>
+<polygon id="0x25879f0" class="l126d0" points="660,0 700,0 700,400 660,400"/>
+<polygon id="0x25df630" class="l126d0" points="740,240 780,240 780,320 740,320"/>
+<polygon id="0x25f2430" class="l126d0" points="740,640 780,640 780,800 740,800"/>
+<polygon id="0x25f24a0" class="l189d4" points="0,0 800,0 800,800 0,800"/>
 </g>
 </svg>
