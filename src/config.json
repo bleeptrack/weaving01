@@ -89,7 +89,7 @@
   "FP_IO_VLENGTH": 2,
 
   "FP_PDN_VPITCH": 1000,
-  "FP_PDN_VOFFSET": 20,
+  "FP_PDN_VOFFSET": 10,
 
   "//": "Clock",
   "RUN_CTS": 1,
