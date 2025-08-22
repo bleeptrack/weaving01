@@ -9,8 +9,8 @@ length = 8  # Reduced from 8
 avg_width = 4  # Reduced from 3
 gap = 1  # Reduced from 1
 
-sizeX = 10
-sizeY = 10
+sizeX = 17
+sizeY = 25
 
 structure = [[random.randint(0, 1) for _ in range(sizeY)] for _ in range(sizeX)]
 
@@ -106,7 +106,7 @@ for i in range(sizeY):  # Reduced from 10
 
 # Add PR boundary (placement and routing boundary)
 # Layer 189, datatype 4 for IHP SG13G2 PR boundary
-pr_boundary = gdstk.rectangle((0, 0), (sizeX*length, sizeY*length), layer=189, datatype=4)
+pr_boundary = gdstk.rectangle((0, 0), (sizeY*length, sizeX*length), layer=189, datatype=4)
 cell.add(pr_boundary)
 
 
@@ -136,8 +136,8 @@ def write_lef_file(filename, cell_name, cell_bounds, pins):
         f.write("END {}\n".format(cell_name))
 
 # Calculate cell bounds (back to original size)
-cell_width = 32  # 32 microns
-cell_height = 32  # 32 microns
+cell_width = sizeY*length  # 32 microns
+cell_height = sizeX*length  # 32 microns
 cell_bounds = (0, 0, cell_width, cell_height)
 
 # Write LEF file
