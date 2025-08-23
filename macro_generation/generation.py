@@ -106,7 +106,7 @@ for i in range(sizeY):  # Reduced from 10
 
 # Add PR boundary (placement and routing boundary)
 # Layer 189, datatype 4 for IHP SG13G2 PR boundary
-pr_boundary = gdstk.rectangle((0, 0), (sizeY*length, sizeX*length), layer=189, datatype=4)
+pr_boundary = gdstk.rectangle((0, 0), (30, 30), layer=189, datatype=4)
 cell.add(pr_boundary)
 
 
