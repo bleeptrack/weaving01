@@ -9,8 +9,8 @@ length = 8  # Reduced from 8
 avg_width = 4  # Reduced from 3
 gap = 1  # Reduced from 1
 
-sizeX = 10
-sizeY = 10
+sizeX = 13
+sizeY = 13
 
 structure = [[random.randint(0, 1) for _ in range(sizeY)] for _ in range(sizeX)]
 
