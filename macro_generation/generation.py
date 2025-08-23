@@ -124,42 +124,9 @@ for i in range(sizeY):
         tx = i * length
         ty = j * length
         # Add larger poly regions for better density coverage
-        poly_rect = gdstk.rectangle((tx+0.5, ty+0.5), (tx+length-0.5, ty+length-0.5), layer=5)
+        poly_rect = gdstk.rectangle((tx+3, ty+3), (tx+length-3, ty+length-3), layer=5)
         cell.add(poly_rect)
 
-# Add selective Active corner fillers (only in some cells to control density)
-for i in range(sizeY):
-    for j in range(sizeX):
-        # Only add corner fillers in every other cell to reduce overall density
-        if (i + j) % 2 == 0:
-            tx = i * length
-            ty = j * length
-            # Add smaller corner fillers
-            corner_size = 1.5
-            corner1 = gdstk.rectangle((tx, ty), (tx+corner_size, ty+corner_size), layer=1)
-            corner2 = gdstk.rectangle((tx+length-corner_size, ty), (tx+length, ty+corner_size), layer=1)
-            corner3 = gdstk.rectangle((tx, ty+length-corner_size), (tx+corner_size, ty+length), layer=1)
-            corner4 = gdstk.rectangle((tx+length-corner_size, ty+length-corner_size), (tx+length, ty+length), layer=1)
-            cell.add(corner1)
-            cell.add(corner2)
-            cell.add(corner3)
-            cell.add(corner4)
-
-# Add comprehensive Poly corner fillers for better Gate Poly density
-for i in range(sizeY):
-    for j in range(sizeX):
-        tx = i * length
-        ty = j * length
-        # Add corner fillers
-        corner_size = 2.0
-        corner1 = gdstk.rectangle((tx, ty), (tx+corner_size, ty+corner_size), layer=5)
-        corner2 = gdstk.rectangle((tx+length-corner_size, ty), (tx+length, ty+corner_size), layer=5)
-        corner3 = gdstk.rectangle((tx, ty+length-corner_size), (tx+corner_size, ty+length), layer=5)
-        corner4 = gdstk.rectangle((tx+length-corner_size, ty+length-corner_size), (tx+length, ty+length), layer=5)
-        cell.add(corner1)
-        cell.add(corner2)
-        cell.add(corner3)
-        cell.add(corner4)
 
 
 # Generate LEF file
