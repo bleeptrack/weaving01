@@ -109,13 +109,13 @@ for i in range(sizeY):  # Reduced from 10
 pr_boundary = gdstk.rectangle((0, 0), (30, 30), layer=189, datatype=4)
 cell.add(pr_boundary)
 
-# Add comprehensive Active fillers (layer 1) to meet minimum density requirements
+# Add moderate Active fillers (layer 1) to meet minimum density requirements but stay under maximum
 for i in range(sizeY):
     for j in range(sizeX):
         tx = i * length
         ty = j * length
-        # Add larger active regions for better density coverage
-        active_rect = gdstk.rectangle((tx+0.5, ty+0.5), (tx+length-0.5, ty+length-0.5), layer=1)
+        # Add moderate active regions - smaller than before to avoid exceeding max density
+        active_rect = gdstk.rectangle((tx+1.5, ty+1.5), (tx+length-1.5, ty+length-1.5), layer=1)
         cell.add(active_rect)
 
 # Add comprehensive Gate Poly fillers (layer 5) to meet minimum density requirements
@@ -127,23 +127,25 @@ for i in range(sizeY):
         poly_rect = gdstk.rectangle((tx+0.5, ty+0.5), (tx+length-0.5, ty+length-0.5), layer=5)
         cell.add(poly_rect)
 
-# Add additional Active fillers in corners and edges for extra density
+# Add selective Active corner fillers (only in some cells to control density)
 for i in range(sizeY):
     for j in range(sizeX):
-        tx = i * length
-        ty = j * length
-        # Add corner fillers
-        corner_size = 2.0
-        corner1 = gdstk.rectangle((tx, ty), (tx+corner_size, ty+corner_size), layer=1)
-        corner2 = gdstk.rectangle((tx+length-corner_size, ty), (tx+length, ty+corner_size), layer=1)
-        corner3 = gdstk.rectangle((tx, ty+length-corner_size), (tx+corner_size, ty+length), layer=1)
-        corner4 = gdstk.rectangle((tx+length-corner_size, ty+length-corner_size), (tx+length, ty+length), layer=1)
-        cell.add(corner1)
-        cell.add(corner2)
-        cell.add(corner3)
-        cell.add(corner4)
+        # Only add corner fillers in every other cell to reduce overall density
+        if (i + j) % 2 == 0:
+            tx = i * length
+            ty = j * length
+            # Add smaller corner fillers
+            corner_size = 1.5
+            corner1 = gdstk.rectangle((tx, ty), (tx+corner_size, ty+corner_size), layer=1)
+            corner2 = gdstk.rectangle((tx+length-corner_size, ty), (tx+length, ty+corner_size), layer=1)
+            corner3 = gdstk.rectangle((tx, ty+length-corner_size), (tx+corner_size, ty+length), layer=1)
+            corner4 = gdstk.rectangle((tx+length-corner_size, ty+length-corner_size), (tx+length, ty+length), layer=1)
+            cell.add(corner1)
+            cell.add(corner2)
+            cell.add(corner3)
+            cell.add(corner4)
 
-# Add additional Poly fillers in corners and edges for extra density
+# Add comprehensive Poly corner fillers for better Gate Poly density
 for i in range(sizeY):
     for j in range(sizeX):
         tx = i * length
