@@ -109,13 +109,13 @@ for i in range(sizeY):  # Reduced from 10
 pr_boundary = gdstk.rectangle((0, 0), (30, 30), layer=189, datatype=4)
 cell.add(pr_boundary)
 
-# Add moderate Active fillers (layer 1) to meet minimum density requirements but stay under maximum
+# Add comprehensive Active fillers (layer 1) to meet minimum density requirements
 for i in range(sizeY):
     for j in range(sizeX):
         tx = i * length
         ty = j * length
-        # Add moderate active regions - smaller than before to avoid exceeding max density
-        active_rect = gdstk.rectangle((tx+1.5, ty+1.5), (tx+length-1.5, ty+length-1.5), layer=1)
+        # Add larger active regions for better density coverage
+        active_rect = gdstk.rectangle((tx+1.0, ty+1.0), (tx+length-1.0, ty+length-1.0), layer=1)
         cell.add(active_rect)
 
 # Add comprehensive Gate Poly fillers (layer 5) to meet minimum density requirements
@@ -124,7 +124,7 @@ for i in range(sizeY):
         tx = i * length
         ty = j * length
         # Add larger poly regions for better density coverage
-        poly_rect = gdstk.rectangle((tx+3, ty+3), (tx+length-3, ty+length-3), layer=5)
+        poly_rect = gdstk.rectangle((tx+1.0, ty+1.0), (tx+length-1.0, ty+length-1.0), layer=5)
         cell.add(poly_rect)
 
 
