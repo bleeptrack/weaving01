@@ -109,23 +109,55 @@ for i in range(sizeY):  # Reduced from 10
 pr_boundary = gdstk.rectangle((0, 0), (30, 30), layer=189, datatype=4)
 cell.add(pr_boundary)
 
-# Add dummy Active fillers (layer 1) to meet minimum density requirements
+# Add comprehensive Active fillers (layer 1) to meet minimum density requirements
 for i in range(sizeY):
     for j in range(sizeX):
         tx = i * length
         ty = j * length
-        # Add small active regions (avoiding existing metal)
-        active_rect = gdstk.rectangle((tx+2, ty+2), (tx+length-2, ty+length-2), layer=1)
+        # Add larger active regions for better density coverage
+        active_rect = gdstk.rectangle((tx+0.5, ty+0.5), (tx+length-0.5, ty+length-0.5), layer=1)
         cell.add(active_rect)
 
-# Add dummy Gate Poly fillers (layer 5) to meet minimum density requirements
+# Add comprehensive Gate Poly fillers (layer 5) to meet minimum density requirements
 for i in range(sizeY):
     for j in range(sizeX):
         tx = i * length
         ty = j * length
-        # Add poly stripes
-        poly_rect = gdstk.rectangle((tx+3, ty+3), (tx+length-3, ty+length-3), layer=5)
+        # Add larger poly regions for better density coverage
+        poly_rect = gdstk.rectangle((tx+0.5, ty+0.5), (tx+length-0.5, ty+length-0.5), layer=5)
         cell.add(poly_rect)
+
+# Add additional Active fillers in corners and edges for extra density
+for i in range(sizeY):
+    for j in range(sizeX):
+        tx = i * length
+        ty = j * length
+        # Add corner fillers
+        corner_size = 2.0
+        corner1 = gdstk.rectangle((tx, ty), (tx+corner_size, ty+corner_size), layer=1)
+        corner2 = gdstk.rectangle((tx+length-corner_size, ty), (tx+length, ty+corner_size), layer=1)
+        corner3 = gdstk.rectangle((tx, ty+length-corner_size), (tx+corner_size, ty+length), layer=1)
+        corner4 = gdstk.rectangle((tx+length-corner_size, ty+length-corner_size), (tx+length, ty+length), layer=1)
+        cell.add(corner1)
+        cell.add(corner2)
+        cell.add(corner3)
+        cell.add(corner4)
+
+# Add additional Poly fillers in corners and edges for extra density
+for i in range(sizeY):
+    for j in range(sizeX):
+        tx = i * length
+        ty = j * length
+        # Add corner fillers
+        corner_size = 2.0
+        corner1 = gdstk.rectangle((tx, ty), (tx+corner_size, ty+corner_size), layer=5)
+        corner2 = gdstk.rectangle((tx+length-corner_size, ty), (tx+length, ty+corner_size), layer=5)
+        corner3 = gdstk.rectangle((tx, ty+length-corner_size), (tx+corner_size, ty+length), layer=5)
+        corner4 = gdstk.rectangle((tx+length-corner_size, ty+length-corner_size), (tx+length, ty+length), layer=5)
+        cell.add(corner1)
+        cell.add(corner2)
+        cell.add(corner3)
+        cell.add(corner4)
 
 
 # Generate LEF file

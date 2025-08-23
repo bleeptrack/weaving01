@@ -3,7 +3,7 @@
     "my_logo": {
       "instances": {
         "logo": {
-          "location": [10, 4],
+          "location": [15, 5],
           "orientation": "N"
         }
       },
