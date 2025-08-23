@@ -10,7 +10,7 @@ avg_width = 4  # Reduced from 3
 gap = 1  # Reduced from 1
 
 sizeX = 15
-sizeY = 15
+sizeY = 17
 
 structure = [[random.randint(0, 1) for _ in range(sizeY)] for _ in range(sizeX)]
 
@@ -108,6 +108,15 @@ for i in range(sizeY):  # Reduced from 10
 # Layer 189, datatype 4 for IHP SG13G2 PR boundary
 pr_boundary = gdstk.rectangle((0, 0), (30, 30), layer=189, datatype=4)
 cell.add(pr_boundary)
+
+# Add dummy Poly fillers
+for i in range(sizeY):
+    for j in range(sizeX):
+        tx = i * length
+        ty = j * length
+        # Add poly stripes
+        poly_rect = gdstk.rectangle((tx+3, ty+3), (tx+length-3, ty+length-3), layer=2)
+        cell.add(poly_rect)
 
 
 # Generate LEF file
