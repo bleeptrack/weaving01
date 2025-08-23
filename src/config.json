@@ -15,12 +15,7 @@
     "my_logo", "logo"
   ],
   "ERROR_ON_DISCONNECTED_PINS": false,
-  "FP_PDN_CHECK_NODES": false,
   "ERROR_ON_PDN_VIOLATIONS": false,
-  "FP_PDN_ENABLE_GRIDS": false,
-  "FP_PDN_ENABLE_MACROS_GRID": false,
-  "FP_PDN_MACRO_GRID": false,
-  "FP_PDN_IRDROP": false,
   "RUN_PDN": false,
   "RUN_LVS": false,
   "RUN_MAGIC_DRC": false,
