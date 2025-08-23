@@ -109,13 +109,22 @@ for i in range(sizeY):  # Reduced from 10
 pr_boundary = gdstk.rectangle((0, 0), (30, 30), layer=189, datatype=4)
 cell.add(pr_boundary)
 
-# Add dummy Poly fillers
+# Add dummy Active fillers (layer 1) to meet minimum density requirements
+for i in range(sizeY):
+    for j in range(sizeX):
+        tx = i * length
+        ty = j * length
+        # Add small active regions (avoiding existing metal)
+        active_rect = gdstk.rectangle((tx+2, ty+2), (tx+length-2, ty+length-2), layer=1)
+        cell.add(active_rect)
+
+# Add dummy Gate Poly fillers (layer 5) to meet minimum density requirements
 for i in range(sizeY):
     for j in range(sizeX):
         tx = i * length
         ty = j * length
         # Add poly stripes
-        poly_rect = gdstk.rectangle((tx+3, ty+3), (tx+length-3, ty+length-3), layer=2)
+        poly_rect = gdstk.rectangle((tx+3, ty+3), (tx+length-3, ty+length-3), layer=5)
         cell.add(poly_rect)
 
 
