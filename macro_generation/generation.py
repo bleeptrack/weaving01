@@ -109,17 +109,35 @@ for i in range(sizeY):  # Reduced from 10
 pr_boundary = gdstk.rectangle((0, 0), (30, 30), layer=189, datatype=4)
 cell.add(pr_boundary)
 
-# Add Metal1 density fillers instead of Active to avoid LU.b latch-up violations
-# Metal1 doesn't create N-diffusion regions that need P-tap contacts
+# Hybrid approach: Metal1 + minimal Active/Poly to satisfy both DRC tools
+# Metal1 for density, tiny Active/Poly to meet KLayout requirements
 
-# Add Metal1 density fillers (layer 8) - small rectangles to meet density requirements
+# Add Metal1 density fillers (layer 8) - main density coverage
 for i in range(sizeY):
     for j in range(sizeX):
         tx = i * length
         ty = j * length
-        # Small metal1 rectangles that don't create N-diffusion regions
+        # Metal1 rectangles for density coverage
         metal1_rect = gdstk.rectangle((tx+3.0, ty+3.0), (tx+length-3.0, ty+length-3.0), layer=8)
         cell.add(metal1_rect)
+
+# Add minimal Active fillers (layer 1) - tiny rectangles to meet KLayout AFil.g
+for i in range(0, sizeY, 3):  # Every 3rd cell to reduce violations
+    for j in range(0, sizeX, 3):
+        tx = i * length
+        ty = j * length
+        # Very small active rectangles to minimize LU.b violations
+        active_rect = gdstk.rectangle((tx+3.8, ty+3.8), (tx+length-3.8, ty+length-3.8), layer=1)
+        cell.add(active_rect)
+
+# Add minimal Poly fillers (layer 5) - tiny rectangles to meet KLayout GFil.g
+for i in range(0, sizeY, 4):  # Every 4th cell to reduce violations
+    for j in range(0, sizeX, 4):
+        tx = i * length
+        ty = j * length
+        # Very small poly rectangles to minimize violations
+        poly_rect = gdstk.rectangle((tx+4.0, ty+4.0), (tx+length-4.0, ty+length-4.0), layer=5)
+        cell.add(poly_rect)
 
 
 
