@@ -108,38 +108,38 @@ pr_boundary = gdstk.rectangle((0, 0), (30, 30), layer=189, datatype=4)
 cell.add(pr_boundary)
 
 # Add comprehensive Active fillers (layer 1) to meet minimum density requirements
-# Use smaller fillers to ensure AFil.a compliance while maintaining density
+# Use consistent 2x2um fillers to ensure AFil.a compliance (1um < width < 5um)
 for i in range(sizeY):
     for j in range(sizeX):
         tx = i * length
         ty = j * length
-        # Add active regions with width < 5um to meet AFil.a rule
+        # Add active regions with width between 1um and 5um to meet AFil.a and AFil.a1 rules
         # Use datatype 22 for Activ filler layer
-        # Make them 4x4um to ensure they're definitely under 5um limit
-        active_rect = gdstk.rectangle((tx+2.0, ty+2.0), (tx+6.0, ty+6.0), layer=1, datatype=22)
-        cell.add(active_rect)
+        # Use 2x2um fillers throughout for consistency
         
-        # Add additional smaller fillers to increase density further
-        # Small 2x2um fillers in corners
-        small_rect1 = gdstk.rectangle((tx+0.5, ty+0.5), (tx+2.5, ty+2.5), layer=1, datatype=22)
-        small_rect2 = gdstk.rectangle((tx+5.5, ty+0.5), (tx+7.5, ty+2.5), layer=1, datatype=22)
-        small_rect3 = gdstk.rectangle((tx+0.5, ty+5.5), (tx+2.5, ty+7.5), layer=1, datatype=22)
-        small_rect4 = gdstk.rectangle((tx+5.5, ty+5.5), (tx+7.5, ty+7.5), layer=1, datatype=22)
-        cell.add(small_rect1)
-        cell.add(small_rect2)
-        cell.add(small_rect3)
-        cell.add(small_rect4)
+        # Main 2x2um filler in center
+        main_rect = gdstk.rectangle((tx+3.0, ty+3.0), (tx+5.0, ty+5.0), layer=1, datatype=22)
+        cell.add(main_rect)
         
-        # Add more small fillers in the middle areas to increase density
-        # 1.5x1.5um fillers in the middle
-        mid_rect1 = gdstk.rectangle((tx+3.25, ty+0.5), (tx+4.75, ty+2.0), layer=1, datatype=22)
-        mid_rect2 = gdstk.rectangle((tx+3.25, ty+6.0), (tx+4.75, ty+7.5), layer=1, datatype=22)
-        mid_rect3 = gdstk.rectangle((tx+0.5, ty+3.25), (tx+2.0, ty+4.75), layer=1, datatype=22)
-        mid_rect4 = gdstk.rectangle((tx+6.0, ty+3.25), (tx+7.5, ty+4.75), layer=1, datatype=22)
-        cell.add(mid_rect1)
-        cell.add(mid_rect2)
-        cell.add(mid_rect3)
-        cell.add(mid_rect4)
+        # Corner 2x2um fillers
+        corner_rect1 = gdstk.rectangle((tx+0.5, ty+0.5), (tx+2.5, ty+2.5), layer=1, datatype=22)
+        corner_rect2 = gdstk.rectangle((tx+5.5, ty+0.5), (tx+7.5, ty+2.5), layer=1, datatype=22)
+        corner_rect3 = gdstk.rectangle((tx+0.5, ty+5.5), (tx+2.5, ty+7.5), layer=1, datatype=22)
+        corner_rect4 = gdstk.rectangle((tx+5.5, ty+5.5), (tx+7.5, ty+7.5), layer=1, datatype=22)
+        cell.add(corner_rect1)
+        cell.add(corner_rect2)
+        cell.add(corner_rect3)
+        cell.add(corner_rect4)
+        
+        # Additional 2x2um fillers for density
+        extra_rect1 = gdstk.rectangle((tx+3.0, ty+0.5), (tx+5.0, ty+2.5), layer=1, datatype=22)
+        extra_rect2 = gdstk.rectangle((tx+3.0, ty+5.5), (tx+5.0, ty+7.5), layer=1, datatype=22)
+        extra_rect3 = gdstk.rectangle((tx+0.5, ty+3.0), (tx+2.5, ty+5.0), layer=1, datatype=22)
+        extra_rect4 = gdstk.rectangle((tx+5.5, ty+3.0), (tx+7.5, ty+5.0), layer=1, datatype=22)
+        cell.add(extra_rect1)
+        cell.add(extra_rect2)
+        cell.add(extra_rect3)
+        cell.add(extra_rect4)
 
 # Add comprehensive Gate Poly fillers (layer 5) to meet minimum density requirements
 for i in range(sizeY):
@@ -148,12 +148,31 @@ for i in range(sizeY):
         ty = j * length
         # Add poly regions that extend beyond active fillers by >= 0.18um to meet GFil.j rule
         # Use datatype 22 for GatPoly filler layer
-        # Need to cover all active regions: main 4x4um + corner 2x2um + middle 1.5x1.5um fillers
-        # Leftmost active edge: tx+0.5 (from corner fillers)
-        # Rightmost active edge: tx+7.5 (from corner fillers)
-        # Poly must extend 0.18um beyond all active regions
-        poly_rect = gdstk.rectangle((tx+0.32, ty+0.32), (tx+7.68, ty+7.68), layer=5, datatype=22)
-        cell.add(poly_rect)
+        # Create individual poly rectangles for each active region to avoid thin strips
+        
+        # Poly for main 4x4um active filler
+        main_poly = gdstk.rectangle((tx+1.82, ty+1.82), (tx+6.18, ty+6.18), layer=5, datatype=22)
+        cell.add(main_poly)
+        
+        # Poly for corner 2x2um active fillers
+        corner_poly1 = gdstk.rectangle((tx+0.32, ty+0.32), (tx+2.68, ty+2.68), layer=5, datatype=22)
+        corner_poly2 = gdstk.rectangle((tx+5.32, ty+0.32), (tx+7.68, ty+2.68), layer=5, datatype=22)
+        corner_poly3 = gdstk.rectangle((tx+0.32, ty+5.32), (tx+2.68, ty+7.68), layer=5, datatype=22)
+        corner_poly4 = gdstk.rectangle((tx+5.32, ty+5.32), (tx+7.68, ty+7.68), layer=5, datatype=22)
+        cell.add(corner_poly1)
+        cell.add(corner_poly2)
+        cell.add(corner_poly3)
+        cell.add(corner_poly4)
+        
+        # Poly for middle 1.5x1.5um active fillers
+        mid_poly1 = gdstk.rectangle((tx+3.07, ty+0.32), (tx+4.93, ty+2.18), layer=5, datatype=22)
+        mid_poly2 = gdstk.rectangle((tx+3.07, ty+5.82), (tx+4.93, ty+7.68), layer=5, datatype=22)
+        mid_poly3 = gdstk.rectangle((tx+0.32, ty+3.07), (tx+2.18, ty+4.93), layer=5, datatype=22)
+        mid_poly4 = gdstk.rectangle((tx+5.82, ty+3.07), (tx+7.68, ty+4.93), layer=5, datatype=22)
+        cell.add(mid_poly1)
+        cell.add(mid_poly2)
+        cell.add(mid_poly3)
+        cell.add(mid_poly4)
 
 
 # Generate LEF file
