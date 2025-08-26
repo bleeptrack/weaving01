@@ -113,8 +113,8 @@ for i in range(sizeY):
         tx = i * length
         ty = j * length
         # Add larger active regions for better density coverage
-        # Use datatype 2 for filler patterns (non-functional)
-        active_rect = gdstk.rectangle((tx+1.0, ty+1.0), (tx+length-1.0, ty+length-1.0), layer=1, datatype=2)
+        # Use datatype 22 for Activ filler layer
+        active_rect = gdstk.rectangle((tx+1.0, ty+1.0), (tx+length-1.0, ty+length-1.0), layer=1, datatype=22)
         cell.add(active_rect)
 
 # Add comprehensive Gate Poly fillers (layer 5) to meet minimum density requirements
@@ -123,8 +123,8 @@ for i in range(sizeY):
         tx = i * length
         ty = j * length
         # Add larger poly regions for better density coverage
-        # Use datatype 2 for filler patterns (non-functional)
-        poly_rect = gdstk.rectangle((tx+1.0, ty+1.0), (tx+length-1.0, ty+length-1.0), layer=5, datatype=2)
+        # Use datatype 22 for GatPoly filler layer
+        poly_rect = gdstk.rectangle((tx+1.0, ty+1.0), (tx+length-1.0, ty+length-1.0), layer=5, datatype=22)
         cell.add(poly_rect)
 
 
