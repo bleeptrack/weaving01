@@ -57,7 +57,6 @@ for i in range(sizeX):  # Reduced from 10
         
             #low_rect = gdstk.rectangle((tx+(length-horz_width)/2, ty), (tx+(length-horz_width)/2+horz_width, ty+length), layer=126)  # TopMetal1
             rect = gdstk.rectangle((tx, ty+(length-vert_width)/2), (tx+block_length, ty+(length-vert_width)/2+vert_width), layer=126)  # TopMetal1
-
             cell.add(rect)
 
 ##invert for easier usage
@@ -96,7 +95,6 @@ for i in range(sizeY):  # Reduced from 10
             #low_rect = gdstk.rectangle((tx+(length-horz_width)/2, ty), (tx+(length-horz_width)/2+horz_width, ty+length), layer=126)  # TopMetal1
             #rect = gdstk.rectangle((tx, ty+(length-vert_width)/2), (tx+block_length, ty+(length-vert_width)/2+vert_width), layer=126)  # TopMetal1
             rect = gdstk.rectangle((tx+(length-horz_width)/2, ty), (tx+(length-horz_width)/2+horz_width, ty+block_length), layer=126) 
-
             cell.add(rect)
 
         
@@ -109,9 +107,25 @@ for i in range(sizeY):  # Reduced from 10
 pr_boundary = gdstk.rectangle((0, 0), (30, 30), layer=189, datatype=4)
 cell.add(pr_boundary)
 
-# Pure TopMetal1 artwork - let OpenLane handle density fillers automatically
-# No density fillers in macro - OpenLane will place them around the macro area
+# Add comprehensive Active fillers (layer 1) to meet minimum density requirements
+for i in range(sizeY):
+    for j in range(sizeX):
+        tx = i * length
+        ty = j * length
+        # Add larger active regions for better density coverage
+        # Use datatype 1 for filler to prevent transistor interpretation
+        active_rect = gdstk.rectangle((tx+1.0, ty+1.0), (tx+length-1.0, ty+length-1.0), layer=1, datatype=1)
+        cell.add(active_rect)
 
+# Add comprehensive Gate Poly fillers (layer 5) to meet minimum density requirements
+for i in range(sizeY):
+    for j in range(sizeX):
+        tx = i * length
+        ty = j * length
+        # Add larger poly regions for better density coverage
+        # Use datatype 1 for filler to prevent transistor interpretation
+        poly_rect = gdstk.rectangle((tx+1.0, ty+1.0), (tx+length-1.0, ty+length-1.0), layer=5, datatype=1)
+        cell.add(poly_rect)
 
 
 # Generate LEF file
