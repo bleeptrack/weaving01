@@ -141,17 +141,25 @@ for i in range(sizeY):
         cell.add(extra_rect3)
         cell.add(extra_rect4)
 
-# Add simple poly fillers to meet minimum density requirements
-# Use large rectangles to avoid thin strips and spacing issues
+# Add minimal poly fillers to meet density requirements
+# Use small, well-spaced rectangles to avoid overhang issues
 for i in range(sizeY):
     for j in range(sizeX):
         tx = i * length
         ty = j * length
         
-        # Add a single large poly rectangle per grid cell
-        # This provides density without creating thin strips
-        poly_rect = gdstk.rectangle((tx+1.0, ty+1.0), (tx+7.0, ty+7.0), layer=5, datatype=22)
-        cell.add(poly_rect)
+        # Add small poly rectangles that don't overlap with active regions
+        # This provides basic density without creating overhang issues
+        # Place them in areas where there are no active fillers
+        poly1 = gdstk.rectangle((tx+0.5, ty+0.5), (tx+1.5, ty+1.5), layer=5, datatype=22)
+        poly2 = gdstk.rectangle((tx+6.5, ty+0.5), (tx+7.5, ty+1.5), layer=5, datatype=22)
+        poly3 = gdstk.rectangle((tx+0.5, ty+6.5), (tx+1.5, ty+7.5), layer=5, datatype=22)
+        poly4 = gdstk.rectangle((tx+6.5, ty+6.5), (tx+7.5, ty+7.5), layer=5, datatype=22)
+        
+        cell.add(poly1)
+        cell.add(poly2)
+        cell.add(poly3)
+        cell.add(poly4)
 
 
 # Generate LEF file
