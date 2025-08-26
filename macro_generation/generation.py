@@ -109,71 +109,25 @@ cell.add(pr_boundary)
 
 # Add comprehensive Active fillers (layer 1) to meet minimum density requirements
 # Use consistent 2x2um fillers to ensure AFil.a compliance (1um < width < 5um)
-for i in range(sizeY):
-    for j in range(sizeX):
-        tx = i * length
-        ty = j * length
-        # Add active regions with width between 1um and 5um to meet AFil.a and AFil.a1 rules
-        # Use datatype 22 for Activ filler layer
-        # Use 2x2um fillers throughout for consistency
-        
-        # Main 2x2um filler in center
-        main_rect = gdstk.rectangle((tx+3.0, ty+3.0), (tx+5.0, ty+5.0), layer=1, datatype=22)
-        cell.add(main_rect)
-        
-        # Corner 2x2um fillers
-        corner_rect1 = gdstk.rectangle((tx+0.5, ty+0.5), (tx+2.5, ty+2.5), layer=1, datatype=22)
-        corner_rect2 = gdstk.rectangle((tx+5.5, ty+0.5), (tx+7.5, ty+2.5), layer=1, datatype=22)
-        corner_rect3 = gdstk.rectangle((tx+0.5, ty+5.5), (tx+2.5, ty+7.5), layer=1, datatype=22)
-        corner_rect4 = gdstk.rectangle((tx+5.5, ty+5.5), (tx+7.5, ty+7.5), layer=1, datatype=22)
-        cell.add(corner_rect1)
-        cell.add(corner_rect2)
-        cell.add(corner_rect3)
-        cell.add(corner_rect4)
-        
-        # Additional 2x2um fillers for density
-        extra_rect1 = gdstk.rectangle((tx+3.0, ty+0.5), (tx+5.0, ty+2.5), layer=1, datatype=22)
-        extra_rect2 = gdstk.rectangle((tx+3.0, ty+5.5), (tx+5.0, ty+7.5), layer=1, datatype=22)
-        extra_rect3 = gdstk.rectangle((tx+0.5, ty+3.0), (tx+2.5, ty+5.0), layer=1, datatype=22)
-        extra_rect4 = gdstk.rectangle((tx+5.5, ty+3.0), (tx+7.5, ty+5.0), layer=1, datatype=22)
-        cell.add(extra_rect1)
-        cell.add(extra_rect2)
-        cell.add(extra_rect3)
-        cell.add(extra_rect4)
+active_dist = 3
+active_size = 3.0 
+overhang = 0.18
 
-# Add poly fillers with proper 0.18um overhang beyond active regions
-# Each poly rectangle extends 0.18um beyond its corresponding active region
-for i in range(sizeY):
-    for j in range(sizeX):
-        tx = i * length
-        ty = j * length
+for i in range(27):
+    for j in range(20):
+        tx = i * (active_size + active_dist)
+        ty = j * (active_size + active_dist)
+
+       
+        rect1 = gdstk.rectangle((tx, ty), (tx+active_size, ty+active_size), layer=1, datatype=22)
+        cell.add(rect1)
         
-        # Poly for main active filler (tx+3.0 to tx+5.0)
-        # Must extend 0.18um beyond: tx+2.82 to tx+5.18
-        main_poly = gdstk.rectangle((tx+2.82, ty+2.82), (tx+5.18, ty+5.18), layer=5, datatype=22)
-        cell.add(main_poly)
+        poly_rect = gdstk.rectangle((tx-overhang, ty-overhang), (tx+active_size+overhang, ty+active_size+overhang), layer=5, datatype=22)
+        cell.add(poly_rect)
+
         
-        # Poly for corner active fillers (tx+0.5 to tx+2.5)
-        # Must extend 0.18um beyond: tx+0.32 to tx+2.68
-        corner_poly1 = gdstk.rectangle((tx+0.32, ty+0.32), (tx+2.68, ty+2.68), layer=5, datatype=22)
-        corner_poly2 = gdstk.rectangle((tx+5.32, ty+0.32), (tx+7.68, ty+2.68), layer=5, datatype=22)
-        corner_poly3 = gdstk.rectangle((tx+0.32, ty+5.32), (tx+2.68, ty+7.68), layer=5, datatype=22)
-        corner_poly4 = gdstk.rectangle((tx+5.32, ty+5.32), (tx+7.68, ty+7.68), layer=5, datatype=22)
-        cell.add(corner_poly1)
-        cell.add(corner_poly2)
-        cell.add(corner_poly3)
-        cell.add(corner_poly4)
-        
-        # Poly for additional active fillers (tx+3.0 to tx+5.0 in middle positions)
-        # Must extend 0.18um beyond: tx+2.82 to tx+5.18
-        extra_poly1 = gdstk.rectangle((tx+2.82, ty+0.32), (tx+5.18, ty+2.68), layer=5, datatype=22)
-        extra_poly2 = gdstk.rectangle((tx+2.82, ty+5.32), (tx+5.18, ty+7.68), layer=5, datatype=22)
-        extra_poly3 = gdstk.rectangle((tx+0.32, ty+2.82), (tx+2.68, ty+5.18), layer=5, datatype=22)
-        extra_poly4 = gdstk.rectangle((tx+5.32, ty+2.82), (tx+7.68, ty+5.18), layer=5, datatype=22)
-        cell.add(extra_poly1)
-        cell.add(extra_poly2)
-        cell.add(extra_poly3)
-        cell.add(extra_poly4)
+
+
 
 
 # Generate LEF file
