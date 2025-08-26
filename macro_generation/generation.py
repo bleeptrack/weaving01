@@ -141,38 +141,21 @@ for i in range(sizeY):
         cell.add(extra_rect3)
         cell.add(extra_rect4)
 
-# Add comprehensive Gate Poly fillers (layer 5) to meet minimum density requirements
-for i in range(sizeY):
-    for j in range(sizeX):
-        tx = i * length
-        ty = j * length
-        # Add poly regions that extend beyond active fillers by >= 0.18um to meet GFil.j rule
-        # Use datatype 22 for GatPoly filler layer
-        # Create individual poly rectangles for each active region to avoid thin strips
-        
-        # Poly for main 4x4um active filler
-        main_poly = gdstk.rectangle((tx+1.82, ty+1.82), (tx+6.18, ty+6.18), layer=5, datatype=22)
-        cell.add(main_poly)
-        
-        # Poly for corner 2x2um active fillers
-        corner_poly1 = gdstk.rectangle((tx+0.32, ty+0.32), (tx+2.68, ty+2.68), layer=5, datatype=22)
-        corner_poly2 = gdstk.rectangle((tx+5.32, ty+0.32), (tx+7.68, ty+2.68), layer=5, datatype=22)
-        corner_poly3 = gdstk.rectangle((tx+0.32, ty+5.32), (tx+2.68, ty+7.68), layer=5, datatype=22)
-        corner_poly4 = gdstk.rectangle((tx+5.32, ty+5.32), (tx+7.68, ty+7.68), layer=5, datatype=22)
-        cell.add(corner_poly1)
-        cell.add(corner_poly2)
-        cell.add(corner_poly3)
-        cell.add(corner_poly4)
-        
-        # Poly for middle 1.5x1.5um active fillers
-        mid_poly1 = gdstk.rectangle((tx+3.07, ty+0.32), (tx+4.93, ty+2.18), layer=5, datatype=22)
-        mid_poly2 = gdstk.rectangle((tx+3.07, ty+5.82), (tx+4.93, ty+7.68), layer=5, datatype=22)
-        mid_poly3 = gdstk.rectangle((tx+0.32, ty+3.07), (tx+2.18, ty+4.93), layer=5, datatype=22)
-        mid_poly4 = gdstk.rectangle((tx+5.82, ty+3.07), (tx+7.68, ty+4.93), layer=5, datatype=22)
-        cell.add(mid_poly1)
-        cell.add(mid_poly2)
-        cell.add(mid_poly3)
-        cell.add(mid_poly4)
+# Temporarily remove poly fillers to focus on active filler compliance first
+# We'll add them back once active fillers are working correctly
+# for i in range(sizeY):
+#     for j in range(sizeX):
+#         tx = i * length
+#         ty = j * length
+#         # Add poly regions that extend beyond active fillers by >= 0.18um to meet GFil.j rule
+#         # Use datatype 22 for GatPoly filler layer
+#         # Use a single large poly rectangle to avoid thin strips and spacing issues
+#         
+#         # All active fillers are within tx+0.5 to tx+7.5, ty+0.5 to ty+7.5
+#         # Poly must extend 0.18um beyond all active regions
+#         # Single large poly rectangle: tx+0.32 to tx+7.68, ty+0.32 to ty+7.68
+#         poly_rect = gdstk.rectangle((tx+0.32, ty+0.32), (tx+7.68, ty+7.68), layer=5, datatype=22)
+#         cell.add(poly_rect)
 
 
 # Generate LEF file
