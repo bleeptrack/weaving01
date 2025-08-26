@@ -109,26 +109,8 @@ for i in range(sizeY):  # Reduced from 10
 pr_boundary = gdstk.rectangle((0, 0), (30, 30), layer=189, datatype=4)
 cell.add(pr_boundary)
 
-# Strategic placement: Active and Poly in different locations to minimize DRC violations
-# No Metal1 fillers - Active + Poly should provide sufficient density
-
-# Add Active fillers (layer 1) - only in even-numbered cells to avoid overlap
-for i in range(0, sizeY, 2):  # Every 2nd row
-    for j in range(0, sizeX, 2):  # Every 2nd column
-        tx = i * length
-        ty = j * length
-        # Small active rectangles in even positions
-        active_rect = gdstk.rectangle((tx+3.5, ty+3.5), (tx+length-3.5, ty+length-3.5), layer=1)
-        cell.add(active_rect)
-
-# Add Poly fillers (layer 5) - only in odd-numbered cells to avoid overlap
-for i in range(1, sizeY, 2):  # Every 2nd row (odd positions)
-    for j in range(1, sizeX, 2):  # Every 2nd column (odd positions)
-        tx = i * length
-        ty = j * length
-        # Small poly rectangles in odd positions
-        poly_rect = gdstk.rectangle((tx+3.5, ty+3.5), (tx+length-3.5, ty+length-3.5), layer=5)
-        cell.add(poly_rect)
+# Pure TopMetal1 artwork - let OpenLane handle density fillers automatically
+# No density fillers in macro - OpenLane will place them around the macro area
 
 
 
