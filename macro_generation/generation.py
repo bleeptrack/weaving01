@@ -109,12 +109,12 @@ cell.add(pr_boundary)
 
 # Add comprehensive Active fillers (layer 1) to meet minimum density requirements
 # Use consistent 2x2um fillers to ensure AFil.a compliance (1um < width < 5um)
-active_dist = 3
+active_dist = 2
 active_size = 3.0 
 overhang = 0.18
 
-for i in range(27):
-    for j in range(20):
+for i in range(32):
+    for j in range(24):
         tx = i * (active_size + active_dist)
         ty = j * (active_size + active_dist)
 
