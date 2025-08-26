@@ -141,25 +141,39 @@ for i in range(sizeY):
         cell.add(extra_rect3)
         cell.add(extra_rect4)
 
-# Add minimal poly fillers to meet density requirements
-# Use small, well-spaced rectangles to avoid overhang issues
+# Add poly fillers with proper 0.18um overhang beyond active regions
+# Each poly rectangle extends 0.18um beyond its corresponding active region
 for i in range(sizeY):
     for j in range(sizeX):
         tx = i * length
         ty = j * length
         
-        # Add small poly rectangles that don't overlap with active regions
-        # This provides basic density without creating overhang issues
-        # Place them in areas where there are no active fillers
-        poly1 = gdstk.rectangle((tx+0.5, ty+0.5), (tx+1.5, ty+1.5), layer=5, datatype=22)
-        poly2 = gdstk.rectangle((tx+6.5, ty+0.5), (tx+7.5, ty+1.5), layer=5, datatype=22)
-        poly3 = gdstk.rectangle((tx+0.5, ty+6.5), (tx+1.5, ty+7.5), layer=5, datatype=22)
-        poly4 = gdstk.rectangle((tx+6.5, ty+6.5), (tx+7.5, ty+7.5), layer=5, datatype=22)
+        # Poly for main active filler (tx+3.0 to tx+5.0)
+        # Must extend 0.18um beyond: tx+2.82 to tx+5.18
+        main_poly = gdstk.rectangle((tx+2.82, ty+2.82), (tx+5.18, ty+5.18), layer=5, datatype=22)
+        cell.add(main_poly)
         
-        cell.add(poly1)
-        cell.add(poly2)
-        cell.add(poly3)
-        cell.add(poly4)
+        # Poly for corner active fillers (tx+0.5 to tx+2.5)
+        # Must extend 0.18um beyond: tx+0.32 to tx+2.68
+        corner_poly1 = gdstk.rectangle((tx+0.32, ty+0.32), (tx+2.68, ty+2.68), layer=5, datatype=22)
+        corner_poly2 = gdstk.rectangle((tx+5.32, ty+0.32), (tx+7.68, ty+2.68), layer=5, datatype=22)
+        corner_poly3 = gdstk.rectangle((tx+0.32, ty+5.32), (tx+2.68, ty+7.68), layer=5, datatype=22)
+        corner_poly4 = gdstk.rectangle((tx+5.32, ty+5.32), (tx+7.68, ty+7.68), layer=5, datatype=22)
+        cell.add(corner_poly1)
+        cell.add(corner_poly2)
+        cell.add(corner_poly3)
+        cell.add(corner_poly4)
+        
+        # Poly for additional active fillers (tx+3.0 to tx+5.0 in middle positions)
+        # Must extend 0.18um beyond: tx+2.82 to tx+5.18
+        extra_poly1 = gdstk.rectangle((tx+2.82, ty+0.32), (tx+5.18, ty+2.68), layer=5, datatype=22)
+        extra_poly2 = gdstk.rectangle((tx+2.82, ty+5.32), (tx+5.18, ty+7.68), layer=5, datatype=22)
+        extra_poly3 = gdstk.rectangle((tx+0.32, ty+2.82), (tx+2.68, ty+5.18), layer=5, datatype=22)
+        extra_poly4 = gdstk.rectangle((tx+5.32, ty+2.82), (tx+7.68, ty+5.18), layer=5, datatype=22)
+        cell.add(extra_poly1)
+        cell.add(extra_poly2)
+        cell.add(extra_poly3)
+        cell.add(extra_poly4)
 
 
 # Generate LEF file
