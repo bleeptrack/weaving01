@@ -112,9 +112,9 @@ for i in range(sizeY):
     for j in range(sizeX):
         tx = i * length
         ty = j * length
-        # Add larger active regions for better density coverage
+        # Add active regions with width < 5um to meet AFil.a rule
         # Use datatype 22 for Activ filler layer
-        active_rect = gdstk.rectangle((tx+1.0, ty+1.0), (tx+length-1.0, ty+length-1.0), layer=1, datatype=22)
+        active_rect = gdstk.rectangle((tx+2.0, ty+2.0), (tx+6.0, ty+6.0), layer=1, datatype=22)
         cell.add(active_rect)
 
 # Add comprehensive Gate Poly fillers (layer 5) to meet minimum density requirements
@@ -122,9 +122,9 @@ for i in range(sizeY):
     for j in range(sizeX):
         tx = i * length
         ty = j * length
-        # Add larger poly regions for better density coverage
+        # Add poly regions that extend beyond active fillers by >= 0.18um to meet GFil.j rule
         # Use datatype 22 for GatPoly filler layer
-        poly_rect = gdstk.rectangle((tx+1.0, ty+1.0), (tx+length-1.0, ty+length-1.0), layer=5, datatype=22)
+        poly_rect = gdstk.rectangle((tx+1.82, ty+1.82), (tx+6.18, ty+6.18), layer=5, datatype=22)
         cell.add(poly_rect)
 
 
