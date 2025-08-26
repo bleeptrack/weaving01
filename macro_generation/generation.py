@@ -109,17 +109,17 @@ for i in range(sizeY):  # Reduced from 10
 pr_boundary = gdstk.rectangle((0, 0), (30, 30), layer=189, datatype=4)
 cell.add(pr_boundary)
 
-# Add minimal Active density fillers to meet density requirements
-# Very small rectangles to minimize LU.b latch-up violations
+# Add Metal1 density fillers instead of Active to avoid LU.b latch-up violations
+# Metal1 doesn't create N-diffusion regions that need P-tap contacts
 
-# Add minimal Active density fillers (layer 1) - tiny rectangles to meet density requirements
+# Add Metal1 density fillers (layer 8) - small rectangles to meet density requirements
 for i in range(sizeY):
     for j in range(sizeX):
         tx = i * length
         ty = j * length
-        # Very small active rectangles to minimize latch-up violations
-        active_rect = gdstk.rectangle((tx+3.5, ty+3.5), (tx+length-3.5, ty+length-3.5), layer=1)
-        cell.add(active_rect)
+        # Small metal1 rectangles that don't create N-diffusion regions
+        metal1_rect = gdstk.rectangle((tx+3.0, ty+3.0), (tx+length-3.0, ty+length-3.0), layer=8)
+        cell.add(metal1_rect)
 
 
 
