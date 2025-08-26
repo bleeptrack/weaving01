@@ -109,9 +109,17 @@ for i in range(sizeY):  # Reduced from 10
 pr_boundary = gdstk.rectangle((0, 0), (30, 30), layer=189, datatype=4)
 cell.add(pr_boundary)
 
-# Remove Active and Poly fillers - they're not needed for artwork and cause DRC violations
-# Active and Poly layers should only exist where there are actual transistors
-# For a pure TopMetal1 artwork macro, we don't need these layers
+# Add only Active density fillers (layer 1) to meet minimum density requirements
+# No Poly fillers - simpler approach with fewer DRC rules to violate
+
+# Add Active density fillers (layer 1) - small rectangles to meet 35% minimum density
+for i in range(sizeY):
+    for j in range(sizeX):
+        tx = i * length
+        ty = j * length
+        # Small active rectangles that don't interfere with transistors
+        active_rect = gdstk.rectangle((tx+2.5, ty+2.5), (tx+length-2.5, ty+length-2.5), layer=1)
+        cell.add(active_rect)
 
 
 
