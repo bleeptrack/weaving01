@@ -109,16 +109,16 @@ for i in range(sizeY):  # Reduced from 10
 pr_boundary = gdstk.rectangle((0, 0), (30, 30), layer=189, datatype=4)
 cell.add(pr_boundary)
 
-# Add only Active density fillers (layer 1) to meet minimum density requirements
-# No Poly fillers - simpler approach with fewer DRC rules to violate
+# Add minimal Active density fillers to meet density requirements
+# Very small rectangles to minimize LU.b latch-up violations
 
-# Add Active density fillers (layer 1) - small rectangles to meet 35% minimum density
+# Add minimal Active density fillers (layer 1) - tiny rectangles to meet density requirements
 for i in range(sizeY):
     for j in range(sizeX):
         tx = i * length
         ty = j * length
-        # Small active rectangles that don't interfere with transistors
-        active_rect = gdstk.rectangle((tx+2.5, ty+2.5), (tx+length-2.5, ty+length-2.5), layer=1)
+        # Very small active rectangles to minimize latch-up violations
+        active_rect = gdstk.rectangle((tx+3.5, ty+3.5), (tx+length-3.5, ty+length-3.5), layer=1)
         cell.add(active_rect)
 
 
