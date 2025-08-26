@@ -108,15 +108,15 @@ pr_boundary = gdstk.rectangle((0, 0), (30, 30), layer=189, datatype=4)
 cell.add(pr_boundary)
 
 # Add comprehensive Active fillers (layer 1) to meet minimum density requirements
-# Increase density by adding more fillers and making them slightly larger (but still < 5um)
+# Use smaller fillers to ensure AFil.a compliance while maintaining density
 for i in range(sizeY):
     for j in range(sizeX):
         tx = i * length
         ty = j * length
         # Add active regions with width < 5um to meet AFil.a rule
         # Use datatype 22 for Activ filler layer
-        # Make them 4.8x4.8um to increase density while staying under 5um limit
-        active_rect = gdstk.rectangle((tx+1.6, ty+1.6), (tx+6.4, ty+6.4), layer=1, datatype=22)
+        # Make them 4x4um to ensure they're definitely under 5um limit
+        active_rect = gdstk.rectangle((tx+2.0, ty+2.0), (tx+6.0, ty+6.0), layer=1, datatype=22)
         cell.add(active_rect)
         
         # Add additional smaller fillers to increase density further
@@ -129,6 +129,17 @@ for i in range(sizeY):
         cell.add(small_rect2)
         cell.add(small_rect3)
         cell.add(small_rect4)
+        
+        # Add more small fillers in the middle areas to increase density
+        # 1.5x1.5um fillers in the middle
+        mid_rect1 = gdstk.rectangle((tx+3.25, ty+0.5), (tx+4.75, ty+2.0), layer=1, datatype=22)
+        mid_rect2 = gdstk.rectangle((tx+3.25, ty+6.0), (tx+4.75, ty+7.5), layer=1, datatype=22)
+        mid_rect3 = gdstk.rectangle((tx+0.5, ty+3.25), (tx+2.0, ty+4.75), layer=1, datatype=22)
+        mid_rect4 = gdstk.rectangle((tx+6.0, ty+3.25), (tx+7.5, ty+4.75), layer=1, datatype=22)
+        cell.add(mid_rect1)
+        cell.add(mid_rect2)
+        cell.add(mid_rect3)
+        cell.add(mid_rect4)
 
 # Add comprehensive Gate Poly fillers (layer 5) to meet minimum density requirements
 for i in range(sizeY):
@@ -137,10 +148,11 @@ for i in range(sizeY):
         ty = j * length
         # Add poly regions that extend beyond active fillers by >= 0.18um to meet GFil.j rule
         # Use datatype 22 for GatPoly filler layer
-        # Need to cover all active regions: main 4.8x4.8um + corner 2x2um fillers
-        # Corner active fillers extend from tx+0.5 to tx+2.5, so poly must start at tx+0.32
-        # Main active fillers extend to tx+6.4, so poly must end at tx+6.58
-        poly_rect = gdstk.rectangle((tx+0.32, ty+0.32), (tx+6.58, ty+6.58), layer=5, datatype=22)
+        # Need to cover all active regions: main 4x4um + corner 2x2um + middle 1.5x1.5um fillers
+        # Leftmost active edge: tx+0.5 (from corner fillers)
+        # Rightmost active edge: tx+7.5 (from corner fillers)
+        # Poly must extend 0.18um beyond all active regions
+        poly_rect = gdstk.rectangle((tx+0.32, ty+0.32), (tx+7.68, ty+7.68), layer=5, datatype=22)
         cell.add(poly_rect)
 
 
