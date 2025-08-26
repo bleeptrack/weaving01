@@ -109,34 +109,25 @@ for i in range(sizeY):  # Reduced from 10
 pr_boundary = gdstk.rectangle((0, 0), (30, 30), layer=189, datatype=4)
 cell.add(pr_boundary)
 
-# Hybrid approach: Metal1 + minimal Active/Poly to satisfy both DRC tools
-# Metal1 for density, tiny Active/Poly to meet KLayout requirements
+# Strategic placement: Active and Poly in different locations to minimize DRC violations
+# No Metal1 fillers - Active + Poly should provide sufficient density
 
-# Add Metal1 density fillers (layer 8) - main density coverage
-for i in range(sizeY):
-    for j in range(sizeX):
+# Add Active fillers (layer 1) - only in even-numbered cells to avoid overlap
+for i in range(0, sizeY, 2):  # Every 2nd row
+    for j in range(0, sizeX, 2):  # Every 2nd column
         tx = i * length
         ty = j * length
-        # Metal1 rectangles for density coverage
-        metal1_rect = gdstk.rectangle((tx+3.0, ty+3.0), (tx+length-3.0, ty+length-3.0), layer=8)
-        cell.add(metal1_rect)
-
-# Add minimal Active fillers (layer 1) - tiny rectangles to meet KLayout AFil.g
-for i in range(0, sizeY, 3):  # Every 3rd cell to reduce violations
-    for j in range(0, sizeX, 3):
-        tx = i * length
-        ty = j * length
-        # Very small active rectangles to minimize LU.b violations
-        active_rect = gdstk.rectangle((tx+3.8, ty+3.8), (tx+length-3.8, ty+length-3.8), layer=1)
+        # Small active rectangles in even positions
+        active_rect = gdstk.rectangle((tx+3.5, ty+3.5), (tx+length-3.5, ty+length-3.5), layer=1)
         cell.add(active_rect)
 
-# Add minimal Poly fillers (layer 5) - tiny rectangles to meet KLayout GFil.g
-for i in range(0, sizeY, 4):  # Every 4th cell to reduce violations
-    for j in range(0, sizeX, 4):
+# Add Poly fillers (layer 5) - only in odd-numbered cells to avoid overlap
+for i in range(1, sizeY, 2):  # Every 2nd row (odd positions)
+    for j in range(1, sizeX, 2):  # Every 2nd column (odd positions)
         tx = i * length
         ty = j * length
-        # Very small poly rectangles to minimize violations
-        poly_rect = gdstk.rectangle((tx+4.0, ty+4.0), (tx+length-4.0, ty+length-4.0), layer=5)
+        # Small poly rectangles in odd positions
+        poly_rect = gdstk.rectangle((tx+3.5, ty+3.5), (tx+length-3.5, ty+length-3.5), layer=5)
         cell.add(poly_rect)
 
 
