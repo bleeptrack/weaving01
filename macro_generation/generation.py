@@ -1,8 +1,8 @@
 import gdstk
 import random
 import math
-min_metal6_width = 1.64  # Minimum Metal6 width in microns
-min_metal6_spacing = 1.64 
+min_metal6_width = 1.7 #1.64  # Minimum Metal6 width in microns
+min_metal6_spacing = 1.7 #1.64 
 
 
 length = 8  # Reduced from 8
@@ -34,59 +34,61 @@ cell = lib.new_cell("my_logo")
 # Increase the grid size to create more TopMetal1 coverage
 for i in range(sizeX):  # Reduced from 10
     start_x = 0
+    start_stub = (length-y_width[0]) /2 - min_metal6_spacing
+    print("start_stub", start_stub, (length-y_width[0]) /2 - min_metal6_spacing)
   
     for j in range(sizeY):  # Reduced from 10
         if j>0 and structure[i][j] == 1 and structure[i][j-1] == 0: 
             start_x = j
-            print("start_x", start_x)
+            start_stub = (length-y_width[j]) /2 - min_metal6_spacing
+            
 
         if j>0 and structure[i][j] == 0 and structure[i][j-1] == 1 or j==len(structure[i])-1 and structure[i][j] == 1:
             end_x = j-1
+            end_stub = (length-y_width[j-1]) /2 - min_metal6_spacing
             if j==len(structure[i])-1 and structure[i][j] == 1:
                 end_x = j
+                end_stub = (length-y_width[j]) /2 - min_metal6_spacing
 
-            print("end_x", end_x, j)
+          
             vert_width = y_width[j]
             
             block_length = length * (end_x-start_x+1)
-            print("block_length", block_length)
+           
 
             # Create the geometry (a single rectangle) and add it to the cell.
             tx = start_x*(length)
             ty = i*(length)
         
             #low_rect = gdstk.rectangle((tx+(length-horz_width)/2, ty), (tx+(length-horz_width)/2+horz_width, ty+length), layer=126)  # TopMetal1
-            rect = gdstk.rectangle((tx, ty+(length-vert_width)/2), (tx+block_length, ty+(length-vert_width)/2+vert_width), layer=126)  # TopMetal1
+            rect = gdstk.rectangle((tx-start_stub, ty+(length-vert_width)/2), (tx+block_length+end_stub, ty+(length-vert_width)/2+vert_width), layer=126)  # TopMetal1
             cell.add(rect)
 
 ##invert for easier usage
 structure = [[1 - cell for cell in row] for row in structure]
-print("structure = [")
-for row in structure:
-    print("    " + str(row) + ",")
-print("]")
 
 
 # Increase the grid size to create more TopMetal1 coverage
 for i in range(sizeY):  # Reduced from 10
     start_y = 0
+    start_stub = (length-x_width[0]) /2 - min_metal6_spacing
   
     for j in range(sizeX):  # Reduced from 10
         #print("j", j, "i", i, structure[j][i])
         if j>0 and structure[j][i] == 1 and structure[j-1][i] == 0: 
             start_y = j
-            print("start_y", start_y)
+            start_stub = (length-x_width[j]) /2 - min_metal6_spacing
 
         if j>0 and structure[j][i] == 0 and structure[j-1][i] == 1 or j==len(structure)-1 and structure[j][i] == 1:
             end_y = j-1
             if j==len(structure)-1 and structure[j][i] == 1:
                 end_y = j
-
-            print("end_y", end_y)
+                end_stub = (length-x_width[j]) /2 - min_metal6_spacing
+        
             horz_width = x_width[j]
             
             block_length = length * (end_y-start_y+1)
-            print("block_length", block_length)
+            
 
             # Create the geometry (a single rectangle) and add it to the cell.
             ty = start_y*(length)
@@ -94,7 +96,7 @@ for i in range(sizeY):  # Reduced from 10
         
             #low_rect = gdstk.rectangle((tx+(length-horz_width)/2, ty), (tx+(length-horz_width)/2+horz_width, ty+length), layer=126)  # TopMetal1
             #rect = gdstk.rectangle((tx, ty+(length-vert_width)/2), (tx+block_length, ty+(length-vert_width)/2+vert_width), layer=126)  # TopMetal1
-            rect = gdstk.rectangle((tx+(length-horz_width)/2, ty), (tx+(length-horz_width)/2+horz_width, ty+block_length), layer=126) 
+            rect = gdstk.rectangle((tx+(length-horz_width)/2, ty-start_stub), (tx+(length-horz_width)/2+horz_width, ty+block_length+end_stub), layer=126) 
             cell.add(rect)
 
         
@@ -102,28 +104,28 @@ for i in range(sizeY):  # Reduced from 10
         
 
 
-# Add PR boundary (placement and routing boundary)
-# Layer 189, datatype 4 for IHP SG13G2 PR boundary
-pr_boundary = gdstk.rectangle((0, 0), (30, 30), layer=189, datatype=4)
-cell.add(pr_boundary)
+# # Add PR boundary (placement and routing boundary)
+# # Layer 189, datatype 4 for IHP SG13G2 PR boundary
+# pr_boundary = gdstk.rectangle((0, 0), (30, 30), layer=189, datatype=4)
+# cell.add(pr_boundary)
 
-# Add comprehensive Active fillers (layer 1) to meet minimum density requirements
-# Use consistent 2x2um fillers to ensure AFil.a compliance (1um < width < 5um)
-active_dist = 1.5
-active_size = 3.0 
-overhang = 0.18
+# # Add comprehensive Active fillers (layer 1) to meet minimum density requirements
+# # Use consistent 2x2um fillers to ensure AFil.a compliance (1um < width < 5um)
+# active_dist = 1.5
+# active_size = 3.0 
+# overhang = 0.18
 
-for i in range(36):
-    for j in range(27):
-        tx = i * (active_size + active_dist)
-        ty = j * (active_size + active_dist)
+# for i in range(36):
+#     for j in range(27):
+#         tx = i * (active_size + active_dist)
+#         ty = j * (active_size + active_dist)
 
        
-        rect1 = gdstk.rectangle((tx, ty), (tx+active_size, ty+active_size), layer=1, datatype=22)
-        cell.add(rect1)
+#         rect1 = gdstk.rectangle((tx, ty), (tx+active_size, ty+active_size), layer=1, datatype=22)
+#         cell.add(rect1)
         
-        poly_rect = gdstk.rectangle((tx-overhang, ty-overhang), (tx+active_size+overhang, ty+active_size+overhang), layer=5, datatype=22)
-        cell.add(poly_rect)
+#         poly_rect = gdstk.rectangle((tx-overhang, ty-overhang), (tx+active_size+overhang, ty+active_size+overhang), layer=5, datatype=22)
+#         cell.add(poly_rect)
 
         
 
