@@ -9,7 +9,7 @@
 module my_logo ();
 endmodule
 
-module tt_blptrk_weaving01 (
+module tt_um_blptrk_weaving01 (
     input  wire [7:0] ui_in,    // Dedicated inputs
     output wire [7:0] uo_out,   // Dedicated outputs
     input  wire [7:0] uio_in,   // IOs: Input path
