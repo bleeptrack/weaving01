@@ -104,28 +104,28 @@ for i in range(sizeY):  # Reduced from 10
         
 
 
-# # Add PR boundary (placement and routing boundary)
-# # Layer 189, datatype 4 for IHP SG13G2 PR boundary
-# pr_boundary = gdstk.rectangle((0, 0), (30, 30), layer=189, datatype=4)
-# cell.add(pr_boundary)
+# Add PR boundary (placement and routing boundary)
+# Layer 189, datatype 4 for IHP SG13G2 PR boundary
+pr_boundary = gdstk.rectangle((0, 0), (30, 30), layer=189, datatype=4)
+cell.add(pr_boundary)
 
-# # Add comprehensive Active fillers (layer 1) to meet minimum density requirements
-# # Use consistent 2x2um fillers to ensure AFil.a compliance (1um < width < 5um)
-# active_dist = 1.5
-# active_size = 3.0 
-# overhang = 0.18
+# Add comprehensive Active fillers (layer 1) to meet minimum density requirements
+# Use consistent 2x2um fillers to ensure AFil.a compliance (1um < width < 5um)
+active_dist = 1.5
+active_size = 3.0 
+overhang = 0.18
 
-# for i in range(36):
-#     for j in range(27):
-#         tx = i * (active_size + active_dist)
-#         ty = j * (active_size + active_dist)
+for i in range(36):
+    for j in range(27):
+        tx = i * (active_size + active_dist)
+        ty = j * (active_size + active_dist)
 
        
-#         rect1 = gdstk.rectangle((tx, ty), (tx+active_size, ty+active_size), layer=1, datatype=22)
-#         cell.add(rect1)
+        rect1 = gdstk.rectangle((tx, ty), (tx+active_size, ty+active_size), layer=1, datatype=22)
+        cell.add(rect1)
         
-#         poly_rect = gdstk.rectangle((tx-overhang, ty-overhang), (tx+active_size+overhang, ty+active_size+overhang), layer=5, datatype=22)
-#         cell.add(poly_rect)
+        poly_rect = gdstk.rectangle((tx-overhang, ty-overhang), (tx+active_size+overhang, ty+active_size+overhang), layer=5, datatype=22)
+        cell.add(poly_rect)
 
         
 
